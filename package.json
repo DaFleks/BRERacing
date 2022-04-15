@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/DaFleks/BRERacing/issues"
   },
-  "homepage": "https://github.com/DaFleks/BRERacing#readme"
+  "homepage": "https://github.com/DaFleks/BRERacing#readme",
+  "dependencies": {
+    "ejs": "^3.0.2",
+    "express": "^4.17.3",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.3.0",
+    "multer": "^1.4.4",
+    "short-uuid": "^4.2.0"
+  }
 }
