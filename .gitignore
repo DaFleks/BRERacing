@@ -2,7 +2,8 @@
 dbConnect.js
 
 #EC2
-EC2/
+BRERacing.pem
+BRERacingcmd.txt
 
 # Logs
 logs
