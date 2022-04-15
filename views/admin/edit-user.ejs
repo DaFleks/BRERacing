@@ -1,0 +1,81 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8 col-lg-4 px-4 mx-auto">
+            <h1><i class="fas fa-user-edit"></i>&#160;&#160;Update User</h1>
+            <hr>
+            <div class="mb-3">
+                <a href="/admin/users" class="text-decoration-none">&#60;&#60;&#160;Back to Users</a>
+            </div>
+
+            <form action="/admin/users" method="POST">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" value="<%= user.email %>">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" id="password" class="form-control"
+                        value="<%= user.password %>">
+                </div>
+                <div class="mb-3">
+                    <label for="id" class="form-label">User ID</label>
+                    <input type="text" name="id" id="id" class="form-control" value="<%= user._id %>" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="state" class="form-label">User Level</label>
+                    <select class="form-select" id="userLevel" name="userLevel">
+                        <% let userLevels = ['Banned', 'Regular User', 'Administrator'] %>
+                        <% let selected; %>
+                        <% for (let i = 0; i < 3; i++) { %>
+                        <% selected = i === user.userLevel ? 'selected' : ''; %>
+                        <option value="<%= i %>" <%= selected %>><%= userLevels[i] %></option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" name="firstName" id="firstName" class="form-control"
+                        value="<%= user.firstName %>">
+                </div>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" name="lastName" id="lastName" class="form-control" value="<%= user.lastName %>">
+                </div>
+                <div class="mb-3">
+                    <label for="street" class="form-label">Street</label>
+                    <input type="text" name="street" id="street" class="form-control" value="<%= user.street %>">
+                </div>
+                <div class="mb-3">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" name="city" id="city" class="form-control" value="<%= user.city %>">
+                </div>
+                <div class="mb-3">
+                    <label for="state" class="form-label">State</label>
+                    <select class="form-select">
+                        <% let statesArr = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']; %>
+                        <% let fullStates = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming']; %>
+                        <% let stateSelected = ''; %>
+                        <% for (let i = 0; i < statesArr.length; i++) { %>
+                            <% selected = statesArr[i] === user.state ? 'selected' : ''; %>
+                            <option value="<%= statesArr[i] %>" <%= selected %>><%= fullStates[i] %></option>
+                        <% } %>
+                    </select>
+
+                </div>
+                <div class="mb-3">
+                    <label for="zip" class="form-label">Zip Code</label>
+                    <input type="text" name="zip" id="zip" class="form-control" value="<%= user.zip %>">
+                </div>
+                <div class="d-grid gap-2 my-4">
+                    <button class="btn btn-success fw-bold">
+                        <i class="fas fa-user-check"></i>&#160;&#160;Add User
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

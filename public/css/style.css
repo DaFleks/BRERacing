@@ -1,0 +1,32 @@
+#message {
+    resize: none;
+}
+
+#details {
+    resize: none;
+}
+
+.img-div {
+    min-height: 10rem;
+    cursor: pointer;
+}
+
+.pImg {
+    min-height: 20rem;
+    cursor: pointer;
+}
+
+.tableImg {
+    height: 7rem;
+}
+
+.editImg {
+    cursor: pointer;
+    max-height: 5rem;
+}
+
+@media only screen and (min-width: 576px) {
+    .img-div {
+        min-height: 15rem;
+    }
+}

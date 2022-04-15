@@ -1,0 +1,51 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8 col-lg-4 px-4 mx-auto">
+            <h1><i class="fas fa-plus-square"></i>&#160;&#160;Add Product</h1>
+            <hr>
+            <div class="mb-3">
+                <a href="/admin/products" class="text-decoration-none">&#60;&#60;&#160;Back to Products</a>
+            </div>
+
+            <form action="/admin/products" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="productName" class="form-label">Name</label>
+                    <input type="text" name="productName" id="productName" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image</label>
+                    <input type="file" name="image" id="image" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="sku" class="form-label">SKU</label>
+                    <input type="text" name="sku" id="sku" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="stock" class="form-label">Stock</label>
+                    <input type="number" name="stock" id="stock" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" name="price" id="price" class="form-control" min="0" step="0.01">
+                </div>
+                <div class="mb-3">
+                    <label for="details" class="form-label">Details</label>
+                    <textarea name="details" id="details" rows="5" class="form-control"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="publish">Publish On Create?&#160;&#160;</label>
+                    <input type="checkbox" name="publish" id="publish" class="form-check-input" value="true">
+                </div>
+                <div class="d-grid gap-2 my-4">
+                    <button class="btn btn-success fw-bold">
+                        <i class="fas fa-plus"></i>&#160;&#160;Add Product
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

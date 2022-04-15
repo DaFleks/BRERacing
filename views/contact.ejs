@@ -1,0 +1,35 @@
+<%- include ('partials/header') %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8 col-lg-4 mx-auto">
+            <h1><i class="fas fa-envelope"></i>&#160;&#160;Contact</h1>
+            <hr>
+            <form action="" method="POST">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" name="name" id="name" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" id="email" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="orderNum" class="form-label">Order Number (If Necessary)</label>
+                    <input type="text" name="orderNum" id="orderNum" class="form-control">
+                </div>
+                <div>
+                    <label for="message" class="form-label">Message</label>
+                    <textarea id="message" name="message" class="form-control" rows="5"></textarea>
+                </div>
+                <div class="d-grid gap-2 my-4">
+                    <button class="btn btn-success fw-bold">
+                        <i class="fas fa-paper-plane"></i>&#160;&#160;Send Email
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include ('partials/footer') %>
