@@ -1,6 +1,9 @@
 #Database 
 dbConnect.js
 
+#EC2
+EC2/
+
 # Logs
 logs
 *.log
