@@ -13,8 +13,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow fixed-top">
-        <div class="container py-1">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 sticky-top shadow">
+        <div id="main-navbar" class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -23,7 +23,8 @@
 
             <a class="navbar-brand" href="/">BRERacing</a>
 
-            <button class="btn btn-secondary position-relative d-lg-none">
+            <!-- MOBILE CART -->
+            <button class="btn btn-secondary position-relative d-lg-none me-4 me-md-0">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     3
@@ -31,7 +32,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
@@ -47,30 +48,22 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Manage
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Order List</a></li>
-                            <li><a class="dropdown-item" href="/admin/products">Product List</a></li>
-                            <li><a class="dropdown-item" href="/admin/users">User List</a></li>
+                        <ul class="dropdown-menu dropdown-menu-dark w-25 mx-auto text-center" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Orders</a></li>
+                            <li><a class="dropdown-item" href="/admin/products">Products</a></li>
+                            <li><a class="dropdown-item" href="/admin/users">Users</a></li>
                             <!-- <li>
-                                <hr class="dropdown-divider">
-                            </li> -->
+                                    <hr class="dropdown-divider">
+                                </li> -->
                         </ul>
                     </li>
                 </ul>
-                <button class="btn btn-secondary position-relative mx-5 d-none d-lg-block">
+                <button class="btn btn-outline-light position-relative ms-5 d-none d-lg-block me-2">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         3
                         <span class="visually-hidden">items in your cart.</span>
                 </button>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fab fa-searchengin"></i>
-                    </button>
-                </form>
             </div>
         </div>
     </nav>
-    <!-- SPACER -->
-    <div class="py-4 my-3"></div>

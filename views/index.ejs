@@ -1,45 +1,78 @@
 <%- include('partials/header') %>
-
-<div class="container">
-    <div class="row">
-        <!-- PRODUCT LIST -->
-        <div class="col-12 px-4">
-            <div class="row">
-                <!-- PRODUCT -->
-                <% products.forEach((product) => { %>
-                <div class="col-6 col-md-4 col-lg-2 mb-4">
-                    <!-- PRODUCT IMAGE 1-->
-                    <div class="img-div mb-4 rounded border shadow
-                    d-flex align-items-center justify-content-center"
-                    onclick="location.href='/products/<%= product._id %>';">
-                        <img src="/images/products/<%= product._id %>/<%= product.image %>"
-                            class="img-fluid" alt="<%= product.name %>">
-                    </div>
-
-                    <!-- PRODUCT IMAGE 2
-                    <div class="img-div mb-4 rounded
-                    d-flex align-items-center justify-content-center">
-                        <img src="/images/products/<%= product._id %>/<%= product.image %>"
-                            class="img-fluid rounded shadow" alt="<%= product.name %>">
-                    </div> -->
-
-                    <!-- PRODUCT NAME -->
-                    <div class="pName">
-                        <h6><a class="text-decoration-none text-dark" href="/products/<%= product._id %>">
-                                <%= product.name %>
-                            </a>
-                        </h6>
-                    </div>
-
-                    <!-- PRODUCT PRICE-->
-                    <div class="pPrice text-success">
-                        <h5>$<%= product.price %></h5>
-                    </div>
+<div id="homeContainer" class="mx-auto bg-light px-md-4 pt-4">
+    <div class="container px-4">
+        <div class="row bg-light mb-4 rounded border">
+            <div class="col-12 d-flex justify-content-around px-md-4">
+                <input id="mobileSearch" class="w-100 px-1 fw-bold font-monospace" type="text" class="form-control"
+                    name="search" id="search" placeholder="Search">
+                <div class="my-auto">
+                    <i class="fas fa-search"></i>
                 </div>
-                <% }) %>
+            </div>
+        </div>
+    </div>
+
+    <div class="container px-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <!-- PRODUCT -->
+                    <% products.forEach((product) => { %>
+                    <div class="col-12 mb-4 mb-md-5 bg-light rounded border py-3">
+                        <div class="row">
+                            <!-- PRODUCT IMAGE -->
+                            <div class="col-3 my-auto text-center">
+                                <a href="/images/products/<%= product._id %>/<%= product.image %> ">
+                                    <img class="pImg img-fluid rounded border"
+                                        src="/images/products/<%= product._id %>/<%= product.image %>"
+                                        alt="<%= product.name %>">
+                                </a>
+                            </div>
+
+                            <div class="col-6 col-md-7 my-auto">
+                                <!-- PRODUCT NAME -->
+                                <div class="pName">
+                                    <h6><a class="text-decoration-none text-dark" href="/products/<%= product._id %>">
+                                            <%= product.name %>
+                                        </a>
+                                    </h6>
+                                </div>
+
+                                <div class="pDetails">
+                                    <p style="font-size: 0.75rem;">1/24 Scale Roll Cage for Slot Cars.</p>
+                                </div>
+
+                                <!-- PRODUCT PRICE-->
+                                <div class="pPrice text-success">
+                                    <h5>$<%= product.price %></h5>
+                                </div>
+
+
+
+                            </div>
+
+                            <!-- ADD TO CART -->
+                            <div class="col-3 col-md-2 text-center">
+                                <div class="row">
+                                    <div class="col-12 col-md-8 mx-auto mb-3">
+                                        <label for="quantity" class="mb-1">Qty.</label>
+                                        <input class="form-control text-center" type="number" name="quantity" id="quantity">
+                                    </div>
+                                    <div class="col-12 col-md-8 mx-auto mb-3">
+                                        <div class="d-grid gap-2">
+                                            <button class="btn btn-success"><i class="fas fa-cart-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <%- include('partials/footer') %>

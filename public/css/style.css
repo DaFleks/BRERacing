@@ -1,17 +1,36 @@
-#message {
+body {
+    background-color: gainsboro;
+}
+
+/* #message {
     resize: none;
 }
 
 #details {
     resize: none;
-}
-
-.img-div {
-    min-height: 10rem;
-    cursor: pointer;
-}
+} */
 
 .pImg {
+    height: 10vh;
+    object-fit: cover;
+}
+
+#mobileSearch {
+    background-color: inherit;
+    border: none;
+    padding: 0;
+    height: 3rem;
+}
+
+#mobileSearchContainer {
+    background-color: aliceblue;
+}
+
+#mobileSearch:focus-visible {
+    outline: -webkit-focus-ring-color auto 0px;
+}
+
+/* .pImg2 {
     min-height: 20rem;
     cursor: pointer;
 }
@@ -23,10 +42,31 @@
 .editImg {
     cursor: pointer;
     max-height: 5rem;
+} */
+
+
+@media only screen and (min-width: 1400px) {
+    #homeContainer {
+        width: 47.5%;
+    }
 }
 
-@media only screen and (min-width: 576px) {
-    .img-div {
-        min-height: 15rem;
+/* NAVBAR */
+@media only screen and (max-width: 1399px) {
+    #main-navbar {
+        width: 100%;
     }
+
+    body {
+        background-color: #FFFFFF;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    #main-navbar {
+        width: 48.75%;
+    }
+
+
+
 }
