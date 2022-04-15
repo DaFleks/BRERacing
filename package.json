@@ -1,0 +1,19 @@
+{
+  "name": "breracing",
+  "version": "1.0.0",
+  "description": "E-Commerce For Slot Car Parts.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaFleks/BRERacing.git"
+  },
+  "author": "Alex P. & Brandon R.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaFleks/BRERacing/issues"
+  },
+  "homepage": "https://github.com/DaFleks/BRERacing#readme"
+}
