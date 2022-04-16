@@ -12,23 +12,24 @@
     <link href="/css/style.css" rel="stylesheet" type="text/css">
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 sticky-top shadow">
+<body style="background-color:gainsboro;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 py-lg-4 sticky-top shadow">
         <div id="main-navbar" class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <i class="fas fa-bars text-light"></i>
             </button>
 
-            <a class="navbar-brand" href="/">BRERacing</a>
+            <a class="navbar-brand text-center ms-5 ms-lg-0" href="/">
+                <img src="/images/logo.png" class="img-fluid" alt="" class="src" style="max-width: 125px;">
+            </a>
 
-            <!-- MOBILE CART -->
-            <button class="btn btn-secondary position-relative d-lg-none me-4 me-md-0">
-                <i class="fas fa-shopping-cart"></i>
+            <button class="navbar-toggler position-relative me-3">
+                <i class="fas fa-shopping-cart text-light"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     3
-                    <span class="visually-hidden">items in your cart.</span>
+                    <span class="visually-hidden">items in your cart.</span></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -58,8 +59,8 @@
                         </ul>
                     </li>
                 </ul>
-                <button class="btn btn-outline-light position-relative ms-5 d-none d-lg-block me-2">
-                    <i class="fas fa-shopping-cart"></i>
+                <button id="lg-cart" class="btn btn-outline-light me-3 position-relative d-none d-lg-block">
+                    <i class="fas fa-shopping-cart text-light fa-2x"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                         3
                         <span class="visually-hidden">items in your cart.</span>

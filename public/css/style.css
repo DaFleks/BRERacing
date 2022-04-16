@@ -1,72 +1,69 @@
 body {
+    background: #8e9eab;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #eef2f3, #8e9eab);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.navbar-dark .navbar-toggler {
+    color: rgba(255, 255, 255, .55);
+    border: none;
+}
+
+.navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: 0 0 0 0rem;
+}
+
+#lg-cart {
+    border: none;
+}
+
+#lg-cart:hover {
+    background: none;
+}
+
+#lg-cart:focus:not(:focus-visible) {
+    box-shadow: 0 0 0 0.0rem rgb(248 249 250 / 50%);
+
+}
+
+
+#homeContainer {
     background-color: gainsboro;
 }
-
-/* #message {
-    resize: none;
-}
-
-#details {
-    resize: none;
-} */
 
 .pImg {
     height: 10vh;
     object-fit: cover;
 }
 
-#mobileSearch {
+#search {
     background-color: inherit;
     border: none;
     padding: 0;
     height: 3rem;
 }
 
-#mobileSearchContainer {
-    background-color: aliceblue;
-}
-
-#mobileSearch:focus-visible {
+#search:focus-visible {
     outline: -webkit-focus-ring-color auto 0px;
 }
 
-/* .pImg2 {
-    min-height: 20rem;
-    cursor: pointer;
-}
-
-.tableImg {
-    height: 7rem;
-}
-
-.editImg {
-    cursor: pointer;
-    max-height: 5rem;
-} */
-
-
-@media only screen and (min-width: 1400px) {
-    #homeContainer {
-        width: 47.5%;
-    }
-}
-
-/* NAVBAR */
 @media only screen and (max-width: 1399px) {
     #main-navbar {
         width: 100%;
     }
-
-    body {
-        background-color: #FFFFFF;
-    }
 }
 
 @media only screen and (min-width: 1400px) {
     #main-navbar {
-        width: 48.75%;
+        width: 50%;
     }
 
-
-
+    #homeContainer {
+        width: 48.75%;
+    }
 }

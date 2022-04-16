@@ -1,9 +1,12 @@
 <%- include('partials/header') %>
-<div id="homeContainer" class="mx-auto bg-light px-md-4 pt-4">
-    <div class="container px-4">
-        <div class="row bg-light mb-4 rounded border">
+
+<div id="homeContainer" class="mx-auto px-md-4 pt-4 shadow vh-100">
+
+    <!-- SEARCH-->
+    <div class="container px-4 mb-4">
+        <div class="row bg-light rounded border">
             <div class="col-12 d-flex justify-content-around px-md-4">
-                <input id="mobileSearch" class="w-100 px-1 fw-bold font-monospace" type="text" class="form-control"
+                <input id="search" class="w-100 px-1 fw-bold font-monospace" type="text" class="form-control"
                     name="search" id="search" placeholder="Search">
                 <div class="my-auto">
                     <i class="fas fa-search"></i>
@@ -18,7 +21,7 @@
                 <div class="row">
                     <!-- PRODUCT -->
                     <% products.forEach((product) => { %>
-                    <div class="col-12 mb-4 mb-md-5 bg-light rounded border py-3">
+                    <div class="col-12 mb-4 mb-md-4 bg-light rounded border py-3 shadow">
                         <div class="row">
                             <!-- PRODUCT IMAGE -->
                             <div class="col-3 my-auto text-center">
@@ -54,12 +57,13 @@
                             <!-- ADD TO CART -->
                             <div class="col-3 col-md-2 text-center">
                                 <div class="row">
-                                    <div class="col-12 col-md-8 mx-auto mb-3">
-                                        <label for="quantity" class="mb-1">Qty.</label>
-                                        <input class="form-control text-center" type="number" name="quantity" id="quantity">
+                                    <div class="col-9 mx-auto mb-3">
+                                        <label for="quantity" class="mb-2">Qty.</label>
+                                        <input class="form-control text-center" type="number" name="quantity"
+                                            id="quantity" value="1">
                                     </div>
-                                    <div class="col-12 col-md-8 mx-auto mb-3">
-                                        <div class="d-grid gap-2">
+                                    <div class="col-9 col-md-9 mx-auto mb-3">
+                                        <div class="d grid gap-2">
                                             <button class="btn btn-success"><i class="fas fa-cart-plus"></i></button>
                                         </div>
                                     </div>
