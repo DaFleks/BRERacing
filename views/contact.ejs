@@ -2,10 +2,11 @@
 
 
 <div class="container cw-50 px-4 mt-4">
+    <h1><i class="fas fa-envelope"></i>&#160;&#160;Contact</h1>
+    <hr>
     <div class="row bg-light py-4 border rounded">
-        <div class="col-12 col-md-8 mx-auto">
-            <h1><i class="fas fa-envelope"></i>&#160;&#160;Contact</h1>
-            <hr>
+        <div class="col-12  mx-auto">
+
             <% if (emailSent) { %>
             <% if (err)  { %>
             <div class="alert alert-danger" role="alert">
@@ -17,6 +18,7 @@
                 <i class="fas fa-check-circle"></i>&#160;&#160;Your email has been sent!
             </div>
             <% }} %>
+            
             <form id="contact-form" action="/contact" method="POST">
                 <div class="mb-3">
                     <label for="email" class=" fw-bold form-label">Email</label>

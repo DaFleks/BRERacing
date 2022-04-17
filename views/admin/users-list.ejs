@@ -1,88 +1,96 @@
 <%- include('../partials/header', {title: 'Users List'}) %>
-<div class="homeContainer mx-auto px-md-4 pt-4 shadow vh-100">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 px-4">
-                <div class="d-flex justify-content-between">
-                    <h1><i class="fas fa-users"></i>&#160;&#160;All Users</h1>
-                    <button class="btn btn-success fw-bold" onclick="location.href='/admin/users/new';">
-                        <i class="fas fa-user-plus"></i>&#160;&#160;Add New User
-                    </button>
-                </div>
-                <hr>
-            </div>
 
-            <div class="col-12 d-none d-md-block">
-                <div class="table-responsive">
-                    <table class="table table-hover table-striped text-center align-middle">
-                        <thead>
-                            <tr>
-                                <th style="width: 10%;">User Level</th>
-                                <th style="width: 20%;">First Name</th>
-                                <th style="width: 20%;">Last Name</th>
-                                <th style="width: 20%;">Email</th>
-                                <th style="width: 10%;">Orders</th>
-                                <th style="width: 10%;">Edit</th>
-                                <th style="width: 10%;">Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% users.forEach((user) => { %>
-                            <tr>
-                                <td>
-                                    <% if (user.userLevel === 0) { %>
-                                    <i class="fas fa-user-slash text-danger"></i>
-                                    <% } else if (user.userLevel === 1) { %>
-                                    <i class="fas fa-user text-primary"></i>
-                                    <% } else if (user.userLevel === 2) { %>
-                                    <i class="fas fa-crown text-warning"></i>
-                                    <% } else { %>
-                                    <i class="fas fa-crown text-warning"></i>
-                                    <% } %>
-                                </td>
-                                <td>
-                                    <%= user.firstName %>
-                                </td>
-                                <td>
-                                    <%= user.lastName %>
-                                </td>
-                                <td>
-                                    <%= user.email %>
-                                </td>
-                                <td>
-                                    <%= user.orders.length %>
-                                </td>
-                                <td>
-                                    <button class="btn btn-primary"
-                                        onclick="location.href='/admin/users/<%= user._id %>';">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                </td>
-                                <td>
-                                    <form action="/admin/users/<%= user._id %>?_method=DELETE" method="POST">
-                                        <button class="btn btn-danger">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <% }) %>
-                        </tbody>
-                    </table>
+<div class="container cw-50 px-4 mt-4">
+    <div class="row">
+        <div class="col-12 px-4">
+            <div class="row">
+                <div class="col-8 col-md-6">
+                    <h1><i class="fas fa-users"></i>&#160;&#160;Users</h1>
                 </div>
-            </div>
-            <div class="col-12 px-4">
-                <hr>
-                <div class="d-flex justify-content-between">
-                    <h1>&#160;</h1>
-                    <button class="btn btn-success fw-bold" onclick="location.href='/admin/users/new';">
-                        <i class="fas fa-user-plus"></i>&#160;&#160;Add New User
+                <div class="col-4 col-md-6 my-auto">
+                    <button class="btn btn-success fw-bold float-end" onclick="location.href='/admin/users/new';">
+                        <span class="d-none d-md-inline">
+                            <i class="fas fa-user-plus"></i>&#160;&#160;Add New User
+                        </span>
+                        <span class="d-md-none">
+                            <i class="fas fa-user-plus"></i>
+                        </span>
                     </button>
                 </div>
             </div>
+            <hr>
+        </div>
+
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped text-center align-middle">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;">Level</th>
+                            <th style="width: 20%;">First Name</th>
+                            <th style="width: 20%;">Last Name</th>
+                            <th style="width: 20%;">Email</th>
+                            <th style="width: 10%;">Orders</th>
+                            <th style="width: 10%;">Edit</th>
+                            <th style="width: 10%;">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach((user) => { %>
+                        <tr>
+                            <td>
+                                <% if (user.userLevel === 0) { %>
+                                <i class="fas fa-user-slash text-danger"></i>
+                                <% } else if (user.userLevel === 1) { %>
+                                <i class="fas fa-user text-primary"></i>
+                                <% } else if (user.userLevel === 2) { %>
+                                <i class="fas fa-crown text-warning"></i>
+                                <% } else { %>
+                                <i class="fas fa-crown text-warning"></i>
+                                <% } %>
+                            </td>
+                            <td>
+                                <%= user.firstName %>
+                            </td>
+                            <td>
+                                <%= user.lastName %>
+                            </td>
+                            <td>
+                                <%= user.email %>
+                            </td>
+                            <td>
+                                <%= user.orders.length %>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" onclick="location.href='/admin/users/<%= user._id %>';">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <form action="/admin/users/<%= user._id %>?_method=DELETE" method="POST">
+                                    <button class="btn btn-danger">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-12 px-4">
+            <hr>
+            <button class="btn btn-success fw-bold float-end" onclick="location.href='/admin/users/new';">
+                <span class="d-none d-md-inline">
+                    <i class="fas fa-user-plus"></i>&#160;&#160;Add New User
+                </span>
+                <span class="d-md-none">
+                    <i class="fas fa-user-plus"></i>
+                </span>
+            </button>
         </div>
     </div>
 </div>
-
 
 <%- include('../partials/footer') %>
