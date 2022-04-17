@@ -17,11 +17,13 @@
   },
   "homepage": "https://github.com/DaFleks/BRERacing#readme",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "ejs": "^3.0.2",
     "express": "^4.17.3",
     "method-override": "^3.0.0",
     "mongoose": "^6.3.0",
     "multer": "^1.4.4",
+    "nodemailer": "^6.7.3",
     "short-uuid": "^4.2.0"
   }
 }

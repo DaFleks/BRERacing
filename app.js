@@ -9,9 +9,13 @@ const short = require('short-uuid');
 const Product = require('./models/product');
 const User = require('./models/user');
 const dbConnect = require('./dbConnect');
+const nodemailer = require('nodemailer');
+require('dotenv').config({
+    path: './vars.env'
+});
 
 //  DB CONNECT
-dbConnect.dbConnect();
+dbConnect.connect();
 
 //  VARIABLES
 const app = express();
@@ -59,7 +63,49 @@ app.get('/products/:id', async (req, res) => {
 
 //  CONTACT PAGE
 app.get('/contact', (req, res) => {
-    res.render('contact');
+    res.render('contact', {
+        emailSent: false,
+        err: false
+    });
+});
+
+app.post('/contact', (req, res) => {
+    const mail = {
+        from: req.body.email,
+        to: process.env.EMAIL,
+        subject: req.body.subject,
+        text: `From: ${req.body.email}\n\n${req.body.message}`
+    }
+    const transporter = nodemailer.createTransport({
+        service: "Gmail",
+        port: 587,
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
+        },
+    });
+
+    // transporter.verify((err, success) => {
+    //     if (err) {
+    //         console.log(err);
+    //     } else {
+    //         console.log('success');
+    //     }
+    // });
+
+    transporter.sendMail(mail, (err, data) => {
+        if (err) {
+            res.render('contact', {
+                emailSent: true,
+                err: true
+            });
+        } else {
+            res.render('contact', {
+                emailSent: true,
+                err: false
+            });
+        }
+    });
 });
 
 //  ADMIN - PRODUCT LIST
@@ -68,7 +114,7 @@ app.get('/admin/products', async (req, res) => {
     res.render('admin/product-list', {
         products
     });
-})
+});
 
 //  ADMIN - ADD PRODUCT
 app.get('/admin/products/add', (req, res) => {
@@ -77,7 +123,7 @@ app.get('/admin/products/add', (req, res) => {
 
 //  ADMIN - ADD PRODUCT POST
 app.post('/admin/products/', upload.single('image'), async (req, res) => {
-    const campground = new Product({
+    const product = new Product({
         name: req.body.productName,
         image: '',
         sku: req.body.sku,
@@ -87,16 +133,16 @@ app.post('/admin/products/', upload.single('image'), async (req, res) => {
         published: req.body.publish === 'true' ? true : false
     })
 
-    fs.mkdirSync('./public/images/products/' + campground._id);
-    let newFilename = campground._id + '__' + req.file.filename;
+    fs.mkdirSync('./public/images/products/' + product._id);
+    let newFilename = product._id + '__' + req.file.filename;
     let oldPath = './public/images/temp/' + req.file.filename;
-    let newPath = './public/images/products/' + campground._id + '/' + newFilename;
+    let newPath = './public/images/products/' + product._id + '/' + newFilename;
     fs.rename(oldPath, newPath, (err) => {
         if (err) console.log(err);
     });
 
-    campground.image = newFilename;
-    await campground.save();
+    product.image = newFilename;
+    await product.save();
     res.redirect('/admin/products');
 });
 

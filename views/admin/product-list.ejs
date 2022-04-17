@@ -1,118 +1,121 @@
-<%- include('../partials/header') %>
-
-<div class="container">
-    <div class="row">
-        <div class="col-12 px-4">
-            <div class="d-flex justify-content-between">
-                <h1><i class="fas fa-shopping-bag"></i>&#160;&#160;All Products</h1>
-                <button class="btn btn-success fw-bold" onclick="location.href='/admin/products/add';">
-                    <i class="fas fa-plus-square"></i>&#160;&#160;Add New Product
-                </button>
+<%- include('../partials/header', {title:"Product List"}) %>
+<div class="homeContainer mx-auto px-md-4 pt-4 shadow vh-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 px-4">
+                <div class="d-flex justify-content-between">
+                    <h1><i class="fas fa-shopping-bag"></i>&#160;&#160;All Products</h1>
+                    <button class="btn btn-success fw-bold" onclick="location.href='/admin/products/add';">
+                        <i class="fas fa-plus-square"></i>&#160;&#160;Add New Product
+                    </button>
+                </div>
+                <hr>
             </div>
-            <hr>
-        </div>
 
-        <% products.forEach((product) => { %>
-        <div class="col-10 mx-auto my-3 py-3 d-md-none border rounded shadow">
-            <div class="row">
-                <div class="col-3">
-                    <img src="/images/products/<%= product._id %>/<%= product.image %>" class="img-fluid" alt="">
-                </div>
-                <div class="col-6">
-                    <h5><%= product.name %></h5>
-                    <h6><%= product.sku %></h6>
-                </div>
-                <div class="col-3 my-auto">
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-outline-primary"
-                            onclick="location.href='/admin/products/<%= product._id %>'"><i
-                                class="fas fa-edit"></i></button>
+            <% products.forEach((product) => { %>
+            <div class="col-10 mx-auto my-3 py-3 d-md-none border rounded shadow">
+                <div class="row">
+                    <div class="col-3">
+                        <img src="/images/products/<%= product._id %>/<%= product.image %>" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-6">
+                        <h5><%= product.name %></h5>
+                        <h6><%= product.sku %></h6>
+                    </div>
+                    <div class="col-3 my-auto">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-primary"
+                                onclick="location.href='/admin/products/<%= product._id %>'"><i
+                                    class="fas fa-edit"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <% }) %>
+            <% }) %>
 
-        <div class="col-12 d-none d-md-block">
-            <div class="table-responsive">
-                <table class="table table-hover table-striped text-center align-middle">
-                    <thead>
-                        <tr>
-                            <th style="width: 9%;">Image</th>
-                            <th style="width: 19%;">Name</th>
-                            <th style="width: 9%;">SKU</th>
-                            <th style="width: 9%;">Stock</th>
-                            <th style="width: 9%;">Price</th>
-                            <th style="width: 9%;">Published</th>
-                            <th style="width: 9%;">Discounted</th>
-                            <th style="width: 9%;">Disc Amt.</th>
-                            <th style="width: 9%;">Edit</th>
-                            <th style="width: 9%;">Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% products.forEach((product) => { %>
-                        <tr>
-                            <td>
-                                <div class="tableImg d-flex align-items-center justify-content-center border bg-light">
-                                    <img class="img-fluid"
-                                        src="/images/products/<%= product._id %>/<%= product.image %>"
-                                        style="max-width: 100px;">
-                                </div>
-                            </td>
-                            <td>
-                                <a href="/products/<%= product._id %>" class="text-decoration-none">
-                                    <%= product.name %>
-                                </a>
-                            </td>
-                            <td>
-                                <%= product.sku %>
-                            </td>
-                            <td>
-                                <%= product.stock %>
-                            </td>
-                            <td>
-                                <%= product.price %>
-                            </td>
-                            <td>
-                                <input type="checkbox" disabled <%= product.published ? "checked" : "" %> />
+            <div class="col-12 d-none d-md-block">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped text-center align-middle">
+                        <thead>
+                            <tr>
+                                <th style="width: 9%;">Image</th>
+                                <th style="width: 19%;">Name</th>
+                                <th style="width: 9%;">SKU</th>
+                                <th style="width: 9%;">Stock</th>
+                                <th style="width: 9%;">Price</th>
+                                <th style="width: 9%;">Published</th>
+                                <th style="width: 9%;">Discounted</th>
+                                <th style="width: 9%;">Disc Amt.</th>
+                                <th style="width: 9%;">Edit</th>
+                                <th style="width: 9%;">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% products.forEach((product) => { %>
+                            <tr class="fw-bold">
+                                <td>
+                                    <div
+                                        class="tableImg d-flex align-items-center justify-content-center border bg-light">
+                                        <img class="img-fluid"
+                                            src="/images/products/<%= product._id %>/<%= product.image %>"
+                                            style="max-width: 100px;">
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="/products/<%= product._id %>" class="text-decoration-none">
+                                        <%= product.name %>
+                                    </a>
+                                </td>
+                                <td>
+                                    <%= product.sku %>
+                                </td>
+                                <td>
+                                    <%= product.stock %>
+                                </td>
+                                <td>
+                                    <%= product.price %>
+                                </td>
+                                <td>
+                                    <input type="checkbox" disabled <%= product.published ? "checked" : "" %> />
 
-                            </td>
-                            <td>
-                                <input type="checkbox" disabled <%= product.isDiscounted ? "checked" : "" %> />
-                            </td>
-                            <td>
-                                <%= product.discountAmount %>%
-                            </td>
-                            <td>
-                                <button class="btn btn-primary"
-                                    onclick="location.href='/admin/products/<%= product._id%>';">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </td>
-                            <td>
-                                <form action="/admin/products/<%= product._id %>?_method=DELETE" method="POST">
-                                    <button class="btn btn-danger">
-                                        <i class="fas fa-trash-alt"></i>
+                                </td>
+                                <td>
+                                    <input type="checkbox" disabled <%= product.isDiscounted ? "checked" : "" %> />
+                                </td>
+                                <td>
+                                    <%= product.discountAmount %>%
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary"
+                                        onclick="location.href='/admin/products/<%= product._id%>';">
+                                        <i class="fas fa-edit"></i>
                                     </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <% }) %>
-                    </tbody>
-                </table>
+                                </td>
+                                <td>
+                                    <form action="/admin/products/<%= product._id %>?_method=DELETE" method="POST">
+                                        <button class="btn btn-danger">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        <div class="col-12 px-4">
-            <div class="d-flex justify-content-between">
-                <h1>&#160;</h1>
-                <button class="btn btn-success fw-bold" onclick="location.href='/admin/products/add';">
-                    <i class="fas fa-plus-square"></i>&#160;&#160;Add New Product
-                </button>
+            <div class="col-12 px-4">
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <h1>&#160;</h1>
+                    <button class="btn btn-success fw-bold" onclick="location.href='/admin/products/add';">
+                        <i class="fas fa-plus-square"></i>&#160;&#160;Add New Product
+                    </button>
+                </div>
             </div>
-            <hr>
         </div>
     </div>
 </div>
+
 
 <%- include('../partials/footer') %>

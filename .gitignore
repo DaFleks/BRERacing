@@ -5,6 +5,9 @@ dbConnect.js
 BRERacing.pem
 BRERacingcmd.txt
 
+#Vars
+vars.env
+
 # Logs
 logs
 *.log
