@@ -34,16 +34,16 @@
                         <input type="file" name="image" id="image" class="form-control">
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-12 col-md-4">
+                <div class="row">
+                    <div class="col-12 col-md-4 mb-3">
                         <label for="sku" class="form-label">SKU</label>
                         <input type="text" name="sku" id="sku" class="form-control" value="<%= product.sku %>">
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-4 mb-3">
                         <label for="stock" class="form-label">Stock</label>
                         <input type="number" name="stock" id="stock" class="form-control" value="<%= product.stock %>">
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-4 mb-3">
                         <label for="price" class="form-label">Price</label>
                         <input type="number" name="price" id="price" class="form-control" min="0" step="0.01"
                             value="<%= product.price %>">
