@@ -14,7 +14,6 @@
                     </form>
                 </div>
             </div>
-
             <form action="/admin/products" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="productName" class="form-label">Name</label>
@@ -24,8 +23,8 @@
                 <div class="row mb-3">
                     <div class="col-12 col-md-3">
                         <label class="form-label">Current Image:</label>
-                        <div class="mb-3">
-                            <img class="img-fluid productImg border rounded"
+                        <div class="mb-3 text-center bg-secondary py-4 rounded">
+                            <img class="img-fluid productImg rounded"
                                 src="/images/products/<%= product.id %>/<%= product.image %>" alt="<%= product.name %>">
                         </div>
                     </div>
@@ -72,12 +71,8 @@
                             <input type="number" name="discountAmount" id="discountAmount" class="form-control"
                                 value="<%= product.discountAmount %>">
                         </div>
-
                     </div>
                 </div>
-
-
-
                 <div class="mb-3">
                     <label for="" class="form-label">Created On:</label>
                     <input type="text" class="form-control" name="createdAt" id="createdAt"
