@@ -210,7 +210,11 @@ app.delete('/admin/users/:id', async (req, res) => {
         _id: req.params.id
     });
     res.redirect('/admin/users');
-})
+});
+
+app.use((req, res) => {
+    res.status(404).send('Page not found');
+});
 
 //  SERVER LISTEN
 app.listen(HTTP_PORT, () => {
