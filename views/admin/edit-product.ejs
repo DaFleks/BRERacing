@@ -1,16 +1,16 @@
-<%- include('../partials/header') %>
+<%- include('../partials/header', {title: 'Update Product'}) %>
 
-<div class="container">
+<div class="container cw-50 my-4">
     <div class="row">
-        <div class="col-12 col-md-8 col-lg-4 px-4 mx-auto">
+        <div class="col-12 px-4 mx-auto">
             <h1><i class="fas fa-edit"></i>&#160;&#160;Update Product</h1>
             <hr>
             <div class="mb-3 d-flex justify-content-between align-items-center">
                 <div> <a href="/admin/products" class="text-decoration-none">&#60;&#60;&#160;Back to Products</a></div>
-
-                <div class="d-grid gap-2">
+                <div class="d-grid gap-2 my-auto">
                     <form action="/admin/products/<%= product._id %>?_method=DELETE" method="POST">
-                        <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                        <button class="btn btn-danger fw-bold"><i class="fas fa-trash-alt"></i><span
+                                class="d-none d-md-inline">&#160;&#160;Delete Product</span></button>
                     </form>
                 </div>
             </div>
@@ -21,45 +21,63 @@
                     <input type="text" name="productName" id="productName" class="form-control"
                         value="<%= product.name %>">
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Current Image:</label>
-                    <div class="mb-3 d-flex align-items-center justify-content-center border rounded">
-                        <img class="img-fluid" src="/images/products/<%= product.id %>/<%= product.image %>"
-                            alt="<%= product.name %>">
+                <div class="row mb-3">
+                    <div class="col-12 col-md-3">
+                        <label class="form-label">Current Image:</label>
+                        <div class="mb-3">
+                            <img class="img-fluid productImg border rounded"
+                                src="/images/products/<%= product.id %>/<%= product.image %>" alt="<%= product.name %>">
+                        </div>
                     </div>
-                    <label for="image" class="form-label">Upload New Image:</label>
-                    <input type="file" name="image" id="image" class="form-control">
+                    <div class="col-12 col-md-9 my-auto">
+                        <label for="image" class="form-label">Upload New Image:</label>
+                        <input type="file" name="image" id="image" class="form-control">
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="sku" class="form-label">SKU</label>
-                    <input type="text" name="sku" id="sku" class="form-control" value="<%= product.sku %>">
-                </div>
-                <div class="mb-3">
-                    <label for="stock" class="form-label">Stock</label>
-                    <input type="number" name="stock" id="stock" class="form-control" value="<%= product.stock %>">
-                </div>
-                <div class="mb-3">
-                    <label for="price" class="form-label">Price</label>
-                    <input type="number" name="price" id="price" class="form-control" min="0" step="0.01"
-                        value="<%= product.price %>">
+                <div class="row mb-3">
+                    <div class="col-12 col-md-4">
+                        <label for="sku" class="form-label">SKU</label>
+                        <input type="text" name="sku" id="sku" class="form-control" value="<%= product.sku %>">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="stock" class="form-label">Stock</label>
+                        <input type="number" name="stock" id="stock" class="form-control" value="<%= product.stock %>">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" name="price" id="price" class="form-control" min="0" step="0.01"
+                            value="<%= product.price %>">
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="details" class="form-label">Details</label>
                     <textarea name="details" id="details" rows="5" class="form-control"></textarea>
                 </div>
-                <div class="mb-3">
-                    <label for="publish">Published&#160;&#160;</label>
-                    <input type="checkbox" <%= product.published ? "checked" : "" %> value="true" />
+                <div class="row">
+                    <div class="col-12 col-md-4 my-auto">
+                        <div class="mb-3">
+                            <label for="publish">Published&#160;&#160;</label>
+                            <input type="checkbox" <%= product.published ? "checked" : "" %> value="true" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 my-auto">
+                        <div class="mb-3">
+                            <label for="publish">Discount Active&#160;&#160;</label>
+                            <input type="checkbox" <%= product.isDiscounted ? "checked" : "" %> value="true" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="mb-3">
+                            <label for="discountAmount" class="form-label">Discount Amount (%)</label>
+                            <input type="number" name="discountAmount" id="discountAmount" class="form-control"
+                                value="<%= product.discountAmount %>">
+                        </div>
+
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="discountAmount" class="form-label">Discount Amount (%)</label>
-                    <input type="number" name="discountAmount" id="discountAmount" class="form-control"
-                        value="<%= product.discountAmount %>">
-                </div>
-                <div class="mb-3">
-                    <label for="publish">Discount Active&#160;&#160;</label>
-                    <input type="checkbox" <%= product.isDiscounted ? "checked" : "" %> value="true" />
-                </div>
+
+
+
                 <div class="mb-3">
                     <label for="" class="form-label">Created On:</label>
                     <input type="text" class="form-control" name="createdAt" id="createdAt"
@@ -70,7 +88,12 @@
                     <input type="text" class="form-control" name="updatedAt" id="updatedAt"
                         value="<%= product.updatedAt %>" disabled>
                 </div>
-                <div class="d-grid gap-2 my-4">
+                <div class="d-md-none d-grid gap-2 my-4">
+                    <button class="btn btn-primary fw-bold">
+                        <i class="fas fa-pen-fancy"></i>&#160;&#160;Update Product
+                    </button>
+                </div>
+                <div class="d-none d-md-block float-end">
                     <button class="btn btn-primary fw-bold">
                         <i class="fas fa-pen-fancy"></i>&#160;&#160;Update Product
                     </button>
