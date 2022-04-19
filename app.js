@@ -8,6 +8,7 @@ const multer = require('multer');
 const short = require('short-uuid');
 const Product = require('./models/product');
 const User = require('./models/user');
+const Faq = require('./models/faq');
 const dbConnect = require('./dbConnect');
 const nodemailer = require('nodemailer');
 require('dotenv').config({
@@ -17,7 +18,7 @@ require('dotenv').config({
 //  DB CONNECT
 dbConnect.connect();
 
-//  VARIABLES
+//  UTILTIES
 const app = express();
 const HTTP_PORT = process.env.port || 3000;
 const db = mongoose.connection;
@@ -108,6 +109,67 @@ app.post('/contact', (req, res) => {
     });
 });
 
+//  FAQS PAGE
+app.get('/faqs', async (req, res) => {
+    const faqs = await Faq.find({});
+    res.render('faqs', {
+        faqs
+    })
+})
+
+//  ADMIN - FAQS LIST
+app.get('/admin/faqs', async (req, res) => {
+    const faqs = await Faq.find({});
+    res.render('admin/faqs-list', {
+        faqs
+    })
+})
+
+//  ADMIN - ADD FAQ
+app.get('/admin/faqs/new', (req, res) => {
+    res.render('admin/add-faq');
+})
+
+//  ADMIN - ADD FAQ POST
+app.post('/admin/faqs/', async (req, res) => {
+    const faq = new Faq({
+        title: req.body.title,
+        comment: req.body.comment
+    })
+    await faq.save();
+    res.redirect('/admin/faqs');
+})
+
+//  ADMIN - EDIT FAQ
+app.get('/admin/faqs/:id', async (req, res) => {
+    const faq = await Faq.findOne({
+        _id: req.params.id
+    })
+
+    res.render('admin/edit-faq', {
+        faq
+    });
+})
+
+//  ADMIN - EDIT FAQ POST
+app.put('/admin/faqs/:id', async (req, res) => {
+    const faq = await Faq.findOne({
+        _id: req.params.id
+    });
+
+    faq.title = req.body.title;
+    faq.comment = req.body.comment;
+
+    await faq.save();
+    res.redirect('/admin/faqs');
+})
+
+//  ADMIN - DELETE FAQ
+app.delete('/admin/faqs/:id', async (req, res) => {
+    await Faq.findByIdAndDelete(req.params.id);
+    res.redirect('/admin/faqs');
+})
+
 //  ADMIN - PRODUCT LIST
 app.get('/admin/products', async (req, res) => {
     const products = await Product.find({});
@@ -156,8 +218,46 @@ app.get('/admin/products/:id', async (req, res) => {
     })
 });
 
+//  ADMIN - UPDATE PRODUCT POST
+app.put('/admin/products/:id', upload.single('image'), async (req, res) => {
+    const product = await Product.findOne({
+        _id: req.params.id
+    })
+
+    if (req.file) {
+        fs.rm('./public/images/products/' + req.params.id + '/' + product.image, (err) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+        let newFilename = product._id + '__' + req.file.filename;
+        let oldPath = './public/images/temp/' + req.file.filename;
+        let newPath = './public/images/products/' + product._id + '/' + newFilename;
+        fs.rename(oldPath, newPath, (err) => {
+            if (err) console.log(err);
+        });
+        product.image = newFilename;
+    }
+
+    product.name = req.body.name;
+    product.sku = req.body.sku;
+    product.stock = req.body.stock;
+    product.price = req.body.price;
+    product.published = req.body.publish === 'true' ? true : false
+
+    await product.save();
+    res.redirect('/admin/products');
+})
+
 //  ADMIN - DELETE PRODUCT
 app.delete('/admin/products/:id', async (req, res) => {
+    fs.rm('./public/images/products/' + req.params.id, {
+        recursive: true
+    }, (err) => {
+        if (err) {
+            console.log(err);
+        }
+    });
     await Product.deleteOne({
         _id: req.params.id
     });
@@ -203,6 +303,26 @@ app.get('/admin/users/:id', async (req, res) => {
         user
     })
 });
+
+//  ADMIN - UPDATE USER POST
+app.put('/admin/users/:id', async (req, res) => {
+    const user = await User.findOne({
+        _id: req.params.id
+    });
+
+    user.userLevel = req.body.userLevel;
+    user.email = req.body.email;
+    user.password = req.body.password;
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+    user.street = req.body.street;
+    user.city = req.body.city;
+    user.state = req.body.state;
+    user.zip = req.body.zip;
+
+    await user.save();
+    res.redirect('/admin/users');
+})
 
 //  ADMIN - DELETE USER
 app.delete('/admin/users/:id', async (req, res) => {

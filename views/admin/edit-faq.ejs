@@ -1,0 +1,55 @@
+<%- include('../partials/header', {title: 'Add New FAQ'}) %>
+
+<div class="container cw-50 my-4">
+    <div class="row">
+        <div class="col-12 px-4 mx-auto">
+            <h1><i class="far fa-question-circle"></i>&#160;&#160;Update FAQ</h1>
+            <hr>
+            <div class="mb-3 d-flex justify-content-between align-items-center">
+                <div> <a href="/admin/faqs" class="text-decoration-none">&#60;&#60;&#160;Back to Products</a></div>
+                <div class="d-grid gap-2 my-auto">
+                    <form action="/admin/faqs/<%= faq._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger fw-bold"><i class="fas fa-trash-alt"></i><span
+                                class="d-none d-md-inline">&#160;&#160;Delete FAQ</span></button>
+                    </form>
+                </div>
+            </div>
+            <form action="/admin/faqs/<%= faq._id %>?_method=PUT" method="POST">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="title" id="title" class="form-control" value="<%= faq.title %>">
+                </div>
+                <div class="mb-3">
+                    <label for="comment" class="form-label">FAQ</label>
+                    <textarea class="form-control" name="comment" id="comment" rows="5"><%= faq.comment %></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="id" class="form-label">FAQ ID</label>
+                    <input type="text" name="id" id="id" class="form-control" value="<%= faq._id %>" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Created On:</label>
+                    <input type="text" class="form-control" name="createdAt" id="createdAt" value="<%= faq.createdAt %>"
+                        disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Last Updated:</label>
+                    <input type="text" class="form-control" name="updatedAt" id="updatedAt" value="<%= faq.updatedAt %>"
+                        disabled>
+                </div>
+                <div class="d-block d-md-none d-grid gap-2 my-4">
+                    <button class="btn btn-primary fw-bold">
+                        <i class="fas fa-plus"></i>&#160;&#160;Update FAQ
+                    </button>
+                </div>
+                <div class="d-none d-md-block float-end">
+                    <button class="btn btn-primary fw-bold">
+                        <i class="fas fa-plus"></i>&#160;&#160;Update FAQ
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>
