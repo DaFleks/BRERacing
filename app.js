@@ -2,6 +2,7 @@
 const express = require('express');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
+const ejsMate = require('ejs-mate');
 const Product = require('./models/product');
 const dbConnect = require('./dbConnect');
 const ExpressError = require('./utils/ExpressError');
@@ -23,6 +24,7 @@ const HTTP_PORT = process.env.port || 3000;
 const db = mongoose.connection;
 
 //  VIEW ENGINE
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 
 //  MIDDLEWARE

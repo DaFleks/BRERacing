@@ -1,72 +1,68 @@
-<%- include('../partials/header', {title:"FAQs List"}) %>
+<% layout ('layouts/boilerplate') %>
 
-<div class="container cw-50 mt-4">
-    <div class="row">
-        <div class="col-12 px-4">
-            <div class="row">
-                <div class="col-8 col-md-6">
-                    <h1><i class="far fa-question-circle"></i>&#160;&#160;FAQs</h1>
-                </div>
-                <div class="col-4 col-md-6 my-auto">
-                    <a href="/admin/faqs/new" class="btn btn-success fw-bold float-end">
-                        <span class="d-none d-md-inline">
-                            <i class="fas fa-plus-square"></i>&#160;&#160;Add New FAQ
-                        </span>
-                        <span class="d-md-none">
-                            <i class="fas fa-plus-square"></i>
-                        </span>
-                    </a>
-                </div>
+<div class="row">
+    <div class="col-12 px-4">
+        <div class="row">
+            <div class="col-8 col-md-6">
+                <h1><i class="far fa-question-circle"></i>&#160;&#160;FAQs</h1>
             </div>
-            <hr>
-        </div>
-
-        <div class="col-12">
-            <div class="table-responsive">
-                <table class="table table-hover table-striped align-middle">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th class="text-center" style="width: 9%;">Edit</th>
-                            <th class="text-center" style="width: 9%;">Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% faqs.forEach((faq) => { %>
-                        <tr class="fw-bold">
-                            <td>
-                                <%= faq.title %>
-                            </td>
-                            <td class="text-center">
-                                <a href="/admin/faqs/<%= faq._id %>" class="btn btn-primary">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            </td>
-                            <td class="text-center">
-                                <form action="/admin/faqs/<%= faq._id %>?_method=DELETE" method="POST">
-                                    <button class="btn btn-danger">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <% }) %>
-                    </tbody>
-                </table>
+            <div class="col-4 col-md-6 my-auto">
+                <a href="/admin/faqs/new" class="btn btn-success fw-bold float-end">
+                    <span class="d-none d-md-inline">
+                        <i class="fas fa-plus-square"></i>&#160;&#160;Add New FAQ
+                    </span>
+                    <span class="d-md-none">
+                        <i class="fas fa-plus-square"></i>
+                    </span>
+                </a>
             </div>
         </div>
-        <div class="col-12 px-4">
-            <hr>
-            <a href="/admin/faqs/new" class="btn btn-success fw-bold float-end">
-                <span class="d-none d-md-inline">
-                    <i class="fas fa-plus-square"></i>&#160;&#160;Add New FAQ
-                </span>
-                <span class="d-md-none">
-                    <i class="fas fa-plus-square"></i>
-                </span>
-            </a>
+        <hr>
+    </div>
+
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th class="text-center" style="width: 9%;">Edit</th>
+                        <th class="text-center" style="width: 9%;">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% faqs.forEach((faq) => { %>
+                    <tr class="fw-bold">
+                        <td>
+                            <%= faq.title %>
+                        </td>
+                        <td class="text-center">
+                            <a href="/admin/faqs/<%= faq._id %>" class="btn btn-primary">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <form action="/admin/faqs/<%= faq._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
         </div>
     </div>
+    <div class="col-12 px-4">
+        <hr>
+        <a href="/admin/faqs/new" class="btn btn-success fw-bold float-end">
+            <span class="d-none d-md-inline">
+                <i class="fas fa-plus-square"></i>&#160;&#160;Add New FAQ
+            </span>
+            <span class="d-md-none">
+                <i class="fas fa-plus-square"></i>
+            </span>
+        </a>
+    </div>
 </div>
-
-<%- include('../partials/footer') %>

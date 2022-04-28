@@ -1,8 +1,5 @@
-<%- include('partials/header', {title:'Slot Car Parts'}) %>
-
-<!-- SEARCH-->
-<!-- <div class="container cw-50 px-4 mt-4">
-    <div class="row bg-light rounded border">
+<% layout('layouts/boilerplate') %>
+<!-- <div class="row bg-light rounded border">
         <div class="col-12 d-flex justify-content-around px-md-4">
             <input id="search" class="w-100 px-1 fw-bold font-monospace" type="text" class="form-control" name="search"
                 id="search" placeholder="Search">
@@ -10,68 +7,62 @@
                 <i class="fas fa-search"></i>
             </div>
         </div>
-    </div>
-</div> -->
+    </div> -->
 
-<div class="container cw-50 px-4 mt-4 d-flex flex-column">
-    <div class="row">
-        <!-- PRODUCT -->
-        <% products.forEach((product) => { %>
-        <div class="col-12 mb-4 bg-light rounded border py-3">
-            <div class="row">
-                <!-- PRODUCT IMAGE -->
-                <div class="col-4 col-md-3 text-center mb-3 mb-md-0">
-                    <a href="/images/products/<%= product._id %>/<%= product.image %> ">
-                        <img class="productImg img-fluid rounded border"
-                            src="/images/products/<%= product._id %>/<%= product.image %>" alt="<%= product.name %>">
-                    </a>
+<div class="row">
+    <!-- PRODUCT -->
+    <% products.forEach((product) => { %>
+    <div class="col-12 mb-4 bg-light rounded border py-3">
+        <div class="row">
+            <!-- PRODUCT IMAGE -->
+            <div class="col-4 col-md-3 text-center mb-3 mb-md-0">
+                <a href="/images/products/<%= product._id %>/<%= product.image %> ">
+                    <img class="productImg img-fluid rounded border"
+                        src="/images/products/<%= product._id %>/<%= product.image %>" alt="<%= product.name %>">
+                </a>
+            </div>
+            <!-- PRODUCT INFO -->
+            <div class="col-8 col-md-6">
+                <!-- PRODUCT NAME -->
+                <div class="productName">
+                    <h3>
+                        <%= product.name %>
+                    </h3>
                 </div>
-                <!-- PRODUCT INFO -->
-                <div class="col-8 col-md-6">
-                    <!-- PRODUCT NAME -->
-                    <div class="productName">
-                        <h3>
-                            <%= product.name %>
-                        </h3>
-                    </div>
-                    <!-- PRODUCT DETAILS -->
-                    <div class="productDetails">
-                        <p>1/24 Scale Roll Cage for Slot Cars.</p>
-                    </div>
+                <!-- PRODUCT DETAILS -->
+                <div class="productDetails">
+                    <p>1/24 Scale Roll Cage for Slot Cars.</p>
+                </div>
 
-                    <!-- PRODUCT PRICE-->
-                    <div class="productPrice text-success">
-                        <h3>$<%= product.price %></h3>
-                    </div>
+                <!-- PRODUCT PRICE-->
+                <div class="productPrice text-success">
+                    <h3>$<%= product.price %></h3>
                 </div>
-                <!-- ADD TO CART -->
-                <div class="col-12 col-md-3 my-auto">
-                    <div class="row">
-                        <!-- QUANTITY -->
-                        <div class="col-4 col-md-12 mb-md-3">
-                            <input class="form-control text-center" type="number" name="quantity" id="quantity"
-                                value="1">
-                        </div>
-                        <!-- ADD TO CART LG -->
-                        <div class="col-8 col-md-12 d-none d-md-block">
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-success fw-bold">
-                                    <i class="fas fa-cart-plus"></i>&#160;&#160;Add To Cart
-                                </button>
-                            </div>
-                        </div>
-                        <!-- ADD TO CART SM -->
-                        <div class="col-8 d-md-none d-flex align-items-end justify-content-end">
+            </div>
+            <!-- ADD TO CART -->
+            <div class="col-12 col-md-3 my-auto">
+                <div class="row">
+                    <!-- QUANTITY -->
+                    <div class="col-4 col-md-12 mb-md-3">
+                        <input class="form-control text-center" type="number" name="quantity" id="quantity" value="1">
+                    </div>
+                    <!-- ADD TO CART LG -->
+                    <div class="col-8 col-md-12 d-none d-md-block">
+                        <div class="d-grid gap-2">
                             <button class="btn btn-success fw-bold">
                                 <i class="fas fa-cart-plus"></i>&#160;&#160;Add To Cart
                             </button>
                         </div>
                     </div>
+                    <!-- ADD TO CART SM -->
+                    <div class="col-8 d-md-none d-flex align-items-end justify-content-end">
+                        <button class="btn btn-success fw-bold">
+                            <i class="fas fa-cart-plus"></i>&#160;&#160;Add To Cart
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-        <% }) %>
     </div>
+    <% }) %>
 </div>
-
-<%- include('partials/footer') %>

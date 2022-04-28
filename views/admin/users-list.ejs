@@ -1,96 +1,92 @@
-<%- include('../partials/header', {title: 'Users List'}) %>
+<% layout ('layouts/boilerplate') %>
 
-<div class="container cw-50 px-4 mt-4">
-    <div class="row">
-        <div class="col-12 px-4">
-            <div class="row">
-                <div class="col-8 col-md-6">
-                    <h1><i class="fas fa-users"></i>&#160;&#160;Users</h1>
-                </div>
-                <div class="col-4 col-md-6 my-auto">
-                    <a href="/admin/users/new" class="btn btn-success fw-bold float-end">
-                        <span class="d-none d-md-inline">
-                            <i class="fas fa-user-plus"></i>&#160;&#160;Add New User
-                        </span>
-                        <span class="d-md-none">
-                            <i class="fas fa-user-plus"></i>
-                        </span>
-                    </a>
-                </div>
+<div class="row">
+    <div class="col-12 px-4">
+        <div class="row">
+            <div class="col-8 col-md-6">
+                <h1><i class="fas fa-users"></i>&#160;&#160;Users</h1>
             </div>
-            <hr>
-        </div>
-
-        <div class="col-12">
-            <div class="table-responsive">
-                <table class="table table-hover table-striped text-center align-middle">
-                    <thead>
-                        <tr>
-                            <th style="width: 10%;">Level</th>
-                            <th style="width: 20%;">First Name</th>
-                            <th style="width: 20%;">Last Name</th>
-                            <th style="width: 20%;">Email</th>
-                            <th style="width: 10%;">Orders</th>
-                            <th style="width: 10%;">Edit</th>
-                            <th style="width: 10%;">Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% users.forEach((user) => { %>
-                        <tr>
-                            <td>
-                                <% if (user.userLevel === 0) { %>
-                                <i class="fas fa-user-slash text-danger"></i>
-                                <% } else if (user.userLevel === 1) { %>
-                                <i class="fas fa-user text-primary"></i>
-                                <% } else if (user.userLevel === 2) { %>
-                                <i class="fas fa-crown text-warning"></i>
-                                <% } else { %>
-                                <i class="fas fa-crown text-warning"></i>
-                                <% } %>
-                            </td>
-                            <td>
-                                <%= user.firstName %>
-                            </td>
-                            <td>
-                                <%= user.lastName %>
-                            </td>
-                            <td>
-                                <%= user.email %>
-                            </td>
-                            <td>
-                                <%= user.orders.length %>
-                            </td>
-                            <td>
-                                <a href="/admin/users/<%= user._id %>" class="btn btn-primary">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <form action="/admin/users/<%= user._id %>?_method=DELETE" method="POST">
-                                    <button class="btn btn-danger">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <% }) %>
-                    </tbody>
-                </table>
+            <div class="col-4 col-md-6 my-auto">
+                <a href="/admin/users/new" class="btn btn-success fw-bold float-end">
+                    <span class="d-none d-md-inline">
+                        <i class="fas fa-user-plus"></i>&#160;&#160;Add New User
+                    </span>
+                    <span class="d-md-none">
+                        <i class="fas fa-user-plus"></i>
+                    </span>
+                </a>
             </div>
         </div>
-        <div class="col-12 px-4">
-            <hr>
-            <a href="/admin/users/new" class="btn btn-success fw-bold float-end">
-                <span class="d-none d-md-inline">
-                    <i class="fas fa-user-plus"></i>&#160;&#160;Add New User
-                </span>
-                <span class="d-md-none">
-                    <i class="fas fa-user-plus"></i>
-                </span>
-            </a>
+        <hr>
+    </div>
+
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped text-center align-middle">
+                <thead>
+                    <tr>
+                        <th style="width: 10%;">Level</th>
+                        <th style="width: 20%;">First Name</th>
+                        <th style="width: 20%;">Last Name</th>
+                        <th style="width: 20%;">Email</th>
+                        <th style="width: 10%;">Orders</th>
+                        <th style="width: 10%;">Edit</th>
+                        <th style="width: 10%;">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach((user) => { %>
+                    <tr>
+                        <td>
+                            <% if (user.userLevel === 0) { %>
+                            <i class="fas fa-user-slash text-danger"></i>
+                            <% } else if (user.userLevel === 1) { %>
+                            <i class="fas fa-user text-primary"></i>
+                            <% } else if (user.userLevel === 2) { %>
+                            <i class="fas fa-crown text-warning"></i>
+                            <% } else { %>
+                            <i class="fas fa-crown text-warning"></i>
+                            <% } %>
+                        </td>
+                        <td>
+                            <%= user.firstName %>
+                        </td>
+                        <td>
+                            <%= user.lastName %>
+                        </td>
+                        <td>
+                            <%= user.email %>
+                        </td>
+                        <td>
+                            <%= user.orders.length %>
+                        </td>
+                        <td>
+                            <a href="/admin/users/<%= user._id %>" class="btn btn-primary">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <form action="/admin/users/<%= user._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
         </div>
     </div>
+    <div class="col-12 px-4">
+        <hr>
+        <a href="/admin/users/new" class="btn btn-success fw-bold float-end">
+            <span class="d-none d-md-inline">
+                <i class="fas fa-user-plus"></i>&#160;&#160;Add New User
+            </span>
+            <span class="d-md-none">
+                <i class="fas fa-user-plus"></i>
+            </span>
+        </a>
+    </div>
 </div>
-
-<%- include('../partials/footer') %>

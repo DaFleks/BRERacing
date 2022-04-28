@@ -1,35 +1,32 @@
-<%- include('partials/header', {title: 'FAQs'}) %>
+<% layout('layouts/boilerplate') %>
 
-<div class="container cw-50 mt-4 d-flex flex-column">
-    <div class="row">
-        <div class="col-12 px-4 mx-auto">
-            <h1><i class="far fa-question-circle"></i>&#160;&#160;FAQs</h1>
-            <hr>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="accordion accordion-flush" id="accordion-faqs-flush">
-                <% for (let i = 0; i < faqs.length; i++) { %>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-heading-<%= i %>">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapse-<%- i %>" aria-expanded="false"
-                            aria-controls="flush-collapse-<%= i %>">
-                            <%= faqs[i].title %>
-                        </button>
-                    </h2>
-                    <div id="flush-collapse-<%= i %>" class="accordion-collapse collapse"
-                        aria-labelledby="flush-heading-<%= i %>" data-bs-parent="#accordion-faqs-flush">
-                        <div class="accordion-body">
-                            <%= faqs[i].comment %>
-                        </div>
-                    </div>
-                </div>
-                <% } %>
-            </div>
-        </div>
+<div class="row">
+    <div class="col-12 px-4 mx-auto">
+        <h1><i class="far fa-question-circle"></i>&#160;&#160;FAQs</h1>
+        <hr>
     </div>
 </div>
 
-<%- include('partials/footer') %>
+<div class="row">
+    <div class="col-12">
+        <div class="accordion accordion-flush" id="accordion-faqs-flush">
+            <% for (let i = 0; i < faqs.length; i++) { %>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-heading-<%= i %>">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapse-<%- i %>" aria-expanded="false"
+                        aria-controls="flush-collapse-<%= i %>">
+                        <%= faqs[i].title %>
+                    </button>
+                </h2>
+                <div id="flush-collapse-<%= i %>" class="accordion-collapse collapse"
+                    aria-labelledby="flush-heading-<%= i %>" data-bs-parent="#accordion-faqs-flush">
+                    <div class="accordion-body">
+                        <%= faqs[i].comment %>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </div>
+</div>

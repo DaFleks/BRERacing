@@ -1,52 +1,52 @@
-<%- include ('partials/header', {title: 'Contact'}) %>
+<% layout('layouts/boilerplate') %>
 
-<div class="container cw-50 px-4 mt-4">
-    <h1><i class="fas fa-envelope"></i>&#160;&#160;Contact</h1>
-    <hr>
-    <div class="row bg-light py-4 border rounded">
-        <div class="col-12  mx-auto">
-
-            <% if (emailSent) { %>
-            <% if (err)  { %>
-            <div class="alert alert-danger" role="alert">
-                <i class="fas fa-exclamation-triangle"></i>&#160;&#160;Error email not sent.
-                <br>We are looking into it, please try again later.
-            </div>
-            <% } else { %>
-            <div class="alert alert-success" role="alert">
-                <i class="fas fa-check-circle"></i>&#160;&#160;Your email has been sent!
-            </div>
-            <% }} %>
-            
-            <form id="contact-form" action="/contact" method="POST">
-                <div class="mb-3">
-                    <label for="email" class=" fw-bold form-label">Email</label>
-                    <input type="email" name="email" id="email" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="subject" class=" fw-bold form-label">Subject</label>
-                    <input type="text" name="subject" id="subject" class="form-control">
-                </div>
-                <div class="mb-4">
-                    <label for="message" class=" fw-bold form-label">Message</label>
-                    <div class="mb-3" style="font-size: 0.8rem;">
-                        Please include your <span class="fw-bold">order number</span> if necessary.</div>
-                    <textarea id="message" name="message" class="form-control" rows="5"></textarea>
-                </div>
-                <div class="d-md-none d-grid gap-2">
-                    <button type="submit" value="submit" class="btn btn-success fw-bold">
-                        <i class="fas fa-paper-plane"></i>&#160;&#160;Send
-                    </button>
-                </div>
-                <div class="d-none d-md-block d-flex float-end">
-                    <button type="submit" value="submit" class="btn btn-success fw-bold">
-                        <i class="fas fa-paper-plane"></i>&#160;&#160;Send
-                    </button>
-                </div>
-            </form>
-        </div>
+<div class="row">
+    <div class="col-12 px-4 mx-auto">
+        <h1><i class="fas fa-envelope"></i>&#160;&#160;Contact</h1>
+        <hr>
     </div>
 </div>
-</div>
 
-<%- include ('partials/footer') %>
+<div class="row bg-light py-4 border rounded">
+    <div class="col-12 mx-auto">
+
+        <% if (emailSent) { %>
+        <% if (err)  { %>
+        <div class="alert alert-danger" role="alert">
+            <i class="fas fa-exclamation-triangle"></i>&#160;&#160;Error email not sent.
+            <br>We are looking into it, please try again later.
+        </div>
+        <% } else { %>
+        <div class="alert alert-success" role="alert">
+            <i class="fas fa-check-circle"></i>&#160;&#160;Your email has been sent!
+        </div>
+        <% }} %>
+
+        <form id="contact-form" action="/contact" method="POST">
+            <div class="mb-3">
+                <label for="email" class=" fw-bold form-label">Email</label>
+                <input type="email" name="email" id="email" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="subject" class=" fw-bold form-label">Subject</label>
+                <input type="text" name="subject" id="subject" class="form-control">
+            </div>
+            <div class="mb-4">
+                <label for="message" class=" fw-bold form-label">Message</label>
+                <div class="mb-3" style="font-size: 0.8rem;">
+                    Please include your <span class="fw-bold">order number</span> if necessary.</div>
+                <textarea id="message" name="message" class="form-control" rows="5"></textarea>
+            </div>
+            <div class="d-md-none d-grid gap-2">
+                <button type="submit" value="submit" class="btn btn-success fw-bold">
+                    <i class="fas fa-paper-plane"></i>&#160;&#160;Send
+                </button>
+            </div>
+            <div class="d-none d-md-block d-flex float-end">
+                <button type="submit" value="submit" class="btn btn-success fw-bold">
+                    <i class="fas fa-paper-plane"></i>&#160;&#160;Send
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
