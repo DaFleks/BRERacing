@@ -4,7 +4,24 @@ const path = require('path');
 const fs = require('fs');
 const short = require('short-uuid');
 const Product = require('../../models/product');
+const {
+    productSchema
+} = require('../../utils/JoiSchemas');
+const catchAsync = require('../../utils/catchAsync');
+const ExpressError = require('../../utils/ExpressError');
 const router = express.Router();
+
+const productValidate = (req, res, next) => {
+    const {
+        error
+    } = productSchema.validate(req.body);
+
+    if (error) {
+        throw new ExpressError(error.message, 400);
+    } else {
+        next();
+    }
+}
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -33,9 +50,9 @@ router.get('/add', (req, res) => {
 })
 
 //  ADMIN - ADD PRODUCT POST
-router.post('/', upload.single('image'), async (req, res) => {
+router.post('/', upload.single('image'), productValidate, catchAsync(async (req, res) => {
     const product = new Product({
-        name: req.body.productName,
+        name: req.body.name,
         image: '',
         sku: req.body.sku,
         stock: req.body.stock,
@@ -43,19 +60,20 @@ router.post('/', upload.single('image'), async (req, res) => {
         details: [''],
         published: req.body.publish === 'true' ? true : false
     })
+    if (req.file) {
+        fs.mkdirSync('./public/images/products/' + product._id);
+        let newFilename = product._id + '__' + req.file.filename;
+        let oldPath = './public/images/temp/' + req.file.filename;
+        let newPath = './public/images/products/' + product._id + '/' + newFilename;
+        fs.rename(oldPath, newPath, (err) => {
+            if (err) console.log(err);
+        });
+        product.image = newFilename;
+    }
 
-    fs.mkdirSync('./public/images/products/' + product._id);
-    let newFilename = product._id + '__' + req.file.filename;
-    let oldPath = './public/images/temp/' + req.file.filename;
-    let newPath = './public/images/products/' + product._id + '/' + newFilename;
-    fs.rename(oldPath, newPath, (err) => {
-        if (err) console.log(err);
-    });
-
-    product.image = newFilename;
     await product.save();
     res.redirect('/admin/products');
-});
+}));
 
 //  ADMIN - UPDATE PRODUCT
 router.get('/:id', async (req, res) => {
@@ -68,7 +86,7 @@ router.get('/:id', async (req, res) => {
 });
 
 //  ADMIN - UPDATE PRODUCT POST
-router.put('/:id', upload.single('image'), async (req, res) => {
+router.put('/:id', upload.single('image'), productValidate, catchAsync(async (req, res) => {
     const product = await Product.findOne({
         _id: req.params.id
     })
@@ -96,10 +114,10 @@ router.put('/:id', upload.single('image'), async (req, res) => {
 
     await product.save();
     res.redirect('/admin/products');
-})
+}))
 
 //  ADMIN - DELETE PRODUCT
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', catchAsync(async (req, res) => {
     fs.rm('./public/images/products/' + req.params.id, {
         recursive: true
     }, (err) => {
@@ -111,6 +129,6 @@ router.delete('/:id', async (req, res) => {
         _id: req.params.id
     });
     res.redirect('/admin/products');
-});
+}));
 
 module.exports = router;
