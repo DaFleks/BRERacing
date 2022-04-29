@@ -10,21 +10,21 @@
         </div>
     </div> -->
 
-<div class="row">
+<div class="row px-3">
     <!-- PRODUCT -->
     <% products.forEach((product) => { %>
     <% if (product.published) { %>
-    <div class="col-12 mb-4 bg-light rounded border py-3">
+    <div class="col-12 mb-4 py-3 border bg-light rounded">
         <div class="row">
             <!-- PRODUCT IMAGE -->
-            <div class="col-4 col-md-3 text-center mb-3 mb-md-0">
+            <div class="col-4 col-md-2 mb-3 mb-md-0" >
                 <a href="/images/products/<%= product._id %>/<%= product.image %> ">
-                    <img class="productImg img-fluid rounded border"
+                    <img class="productImg img-fluid rounded border" style="background-color: #FFFFFF;"
                         src="/images/products/<%= product._id %>/<%= product.image %>" alt="<%= product.name %>">
                 </a>
             </div>
             <!-- PRODUCT INFO -->
-            <div class="col-8 col-md-6">
+            <div class="col-8 col-md-7">
                 <!-- PRODUCT NAME -->
                 <div class="productName">
                     <h3>

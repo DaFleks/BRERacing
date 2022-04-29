@@ -1,4 +1,7 @@
 const Joi = require('joi');
+const {
+    joiPassword
+} = require('joi-password');
 
 module.exports.contactSchema = Joi.object({
     email: Joi.string().email({
@@ -18,6 +21,36 @@ module.exports.productSchema = Joi.object({
     sku: Joi.string().required(),
     stock: Joi.number().min(0).required(),
     price: Joi.number().min(0).required(),
-    details: Joi.allow(),
-    publish: Joi.allow()
+    details: Joi.string(),
+    publish: Joi.number().min(0).max(1)
+})
+
+module.exports.userSchema = Joi.object({
+    userLevel: Joi.number()
+        .min(0)
+        .max(2)
+        .required(),
+    email: Joi.string()
+        .email({
+            minDomainSegments: 2
+        }).required(),
+    password: joiPassword
+        .string()
+        .minOfSpecialCharacters(1)
+        .minOfLowercase(1)
+        .minOfUppercase(1)
+        .minOfNumeric(1)
+        .noWhiteSpaces()
+        .required(),
+    password2: Joi.string()
+        .valid(Joi.ref('password'))
+        .required(),
+    firstName: Joi.string()
+        .required(),
+    lastName: Joi.string()
+        .required(),
+    street: Joi.string(),
+    city: Joi.string(),
+    state: Joi.string(),
+    zip: Joi.string()
 })

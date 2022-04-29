@@ -40,7 +40,7 @@ const UserSchema = new Schema({
     userLevel: {
         type: Number,
         min: 0,
-        max: 3,
+        max: 2,
         default: 1,
         required: true
     }

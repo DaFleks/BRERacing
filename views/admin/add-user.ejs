@@ -8,12 +8,12 @@
             <a href="/admin/users" class="text-decoration-none">&#60;&#60;&#160;Back to Users</a>
         </div>
 
-        <form action="/admin/users" method="POST">
+        <form action="/admin/users" method="POST" class="needs-validation" novalidate>
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="state" class="form-label">User Level</label>
-                        <select class="form-select" id="userLevel" name="userLevel">
+                        <select class="form-select" id="userLevel" name="userLevel" required>
                             <option value="0">Banned</option>
                             <option value="1" selected>Regular User</option>
                             <option value="2">Administrator</option>
@@ -23,7 +23,10 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" id="email" class="form-control">
+                        <input type="email" name="email" id="email" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Email is required.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -31,13 +34,20 @@
                 <div class="col-6">
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" name="password" id="password" class="form-control">
+                        <input type="password" name="password" id="password" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Please provide a password.
+                        </div>
                     </div>
+
                 </div>
                 <div class="col-6">
                     <div class="mb-3">
                         <label for="password2" class="form-label">Confirm Password</label>
-                        <input type="password" name="password2" id="password" 2 class="form-control">
+                        <input type="password" name="password2" id="password2" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Please confirm your password.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -45,13 +55,19 @@
                 <div class="col-6">
                     <div class="mb-3">
                         <label for="firstName" class="form-label">First Name</label>
-                        <input type="text" name="firstName" id="firstName" class="form-control">
+                        <input type="text" name="firstName" id="firstName" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Please provide your first name.
+                        </div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="mb-3">
                         <label for="lastName" class="form-label">Last Name</label>
-                        <input type="text" name="lastName" id="lastName" class="form-control">
+                        <input type="text" name="lastName" id="lastName" class="form-control" required>
+                        <div class="invalid-feedback">
+                            Please provide your last name.
+                        </div>
                     </div>
                 </div>
             </div>
