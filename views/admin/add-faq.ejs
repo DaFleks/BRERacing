@@ -1,33 +1,38 @@
-
 <% layout ('layouts/boilerplate') %>
 
-    <div class="row">
-        <div class="col-12 px-4 mx-auto">
-            <h1><i class="far fa-question-circle"></i>&#160;&#160;Add FAQ</h1>
-            <hr>
-            <div class="mb-3">
-                <a href="/admin/faqs" class="text-decoration-none">&#60;&#60;&#160;Back to FAQs Table</a>
-            </div>
-
-            <form action="/admin/faqs" method="POST">
-                <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" name="title" id="title" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="comment" class="form-label">FAQ</label>
-                    <textarea class="form-control" name="comment" id="comment" rows="5"></textarea>
-                </div>
-                <div class="d-block d-md-none d-grid gap-2 my-4">
-                    <button class="btn btn-success fw-bold">
-                        <i class="fas fa-plus"></i>&#160;&#160;Add FAQ
-                    </button>
-                </div>
-                <div class="d-none d-md-block float-end">
-                    <button class="btn btn-success fw-bold">
-                        <i class="fas fa-plus"></i>&#160;&#160;Add FAQ
-                    </button>
-                </div>
-            </form>
+<div class="row">
+    <div class="col-12 px-4 mx-auto">
+        <h1><i class="far fa-question-circle"></i>&#160;&#160;Add FAQ</h1>
+        <hr>
+        <div class="mb-3">
+            <a href="/admin/faqs" class="text-decoration-none">&#60;&#60;&#160;Back to FAQs Table</a>
         </div>
+
+        <form action="/admin/faqs" method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="title" id="title" class="form-control" required>
+                <div class="invalid-feedback">
+                    Title cannot be empty.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="comment" class="form-label">FAQ</label>
+                <textarea class="form-control" name="comment" id="comment" rows="5" required></textarea>
+                <div class="invalid-feedback">
+                    FAQ cannot be empty.
+                </div>
+            </div>
+            <div class="d-block d-md-none d-grid gap-2 my-4">
+                <button class="btn btn-success fw-bold">
+                    <i class="fas fa-plus"></i>&#160;&#160;Add FAQ
+                </button>
+            </div>
+            <div class="d-none d-md-block float-end">
+                <button class="btn btn-success fw-bold">
+                    <i class="fas fa-plus"></i>&#160;&#160;Add FAQ
+                </button>
+            </div>
+        </form>
     </div>
+</div>

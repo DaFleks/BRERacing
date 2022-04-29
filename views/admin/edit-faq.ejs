@@ -13,14 +13,20 @@
                 </form>
             </div>
         </div>
-        <form action="/admin/faqs/<%= faq._id %>?_method=PUT" method="POST">
+        <form action="/admin/faqs/<%= faq._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" name="title" id="title" class="form-control" value="<%= faq.title %>">
+                <input type="text" name="title" id="title" class="form-control" value="<%= faq.title %>" required>
+                <div class="invalid-feedback">
+                    Title cannot be empty.
+                </div>
             </div>
             <div class="mb-3">
                 <label for="comment" class="form-label">FAQ</label>
-                <textarea class="form-control" name="comment" id="comment" rows="5"><%= faq.comment %></textarea>
+                <textarea class="form-control" name="comment" id="comment" rows="5" required><%= faq.comment %></textarea>
+                <div class="invalid-feedback">
+                    FAQ cannot be empty.
+                </div>
             </div>
             <div class="mb-3">
                 <label for="id" class="form-label">FAQ ID</label>

@@ -1,9 +1,25 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
+const ExpressError = require('../utils/ExpressError')
+const {
+    contactSchema
+} = require('../utils/JoiSchemas');
 const router = express.Router();
 require('dotenv').config({
     path: './vars.env'
 });
+
+const validateContact = (req, res, next) => {
+    const {
+        error
+    } = contactSchema.validate(req.body);
+
+    if (error) {
+        throw new ExpressError(error.message, 400);
+    } else {
+        next();
+    }
+}
 
 //  CONTACT PAGE
 router.get('/', (req, res) => {
@@ -14,7 +30,7 @@ router.get('/', (req, res) => {
 });
 
 // CONTACT POST
-router.post('/', (req, res) => {
+router.post('/', validateContact, (req, res) => {
     const mail = {
         from: req.body.email,
         to: process.env.EMAIL,

@@ -7,9 +7,8 @@
     </div>
 </div>
 
-<div class="row bg-light py-4 border rounded">
-    <div class="col-12 mx-auto">
-
+<div class="row">
+    <div class="col-12 px-4">
         <% if (emailSent) { %>
         <% if (err)  { %>
         <div class="alert alert-danger" role="alert">
@@ -22,28 +21,37 @@
         </div>
         <% }} %>
 
-        <form id="contact-form" action="/contact" method="POST">
+        <form id="contact-form" action="/contact" method="POST" class="needs-validation" novalidate>
             <div class="mb-3">
-                <label for="email" class=" fw-bold form-label">Email</label>
-                <input type="email" name="email" id="email" class="form-control">
+                <label for="email" class="fw-bold form-label">Email</label>
+                <input type="email" name="email" id="email" class="form-control" required>
+                <div class="invalid-feedback">
+                    Please provide a valid email address.
+                </div>
             </div>
             <div class="mb-3">
                 <label for="subject" class=" fw-bold form-label">Subject</label>
-                <input type="text" name="subject" id="subject" class="form-control">
+                <input type="text" name="subject" id="subject" class="form-control" required>
+                <div class="invalid-feedback">
+                    Please provide a subject.
+                </div>
             </div>
             <div class="mb-4">
                 <label for="message" class=" fw-bold form-label">Message</label>
                 <div class="mb-3" style="font-size: 0.8rem;">
                     Please include your <span class="fw-bold">order number</span> if necessary.</div>
-                <textarea id="message" name="message" class="form-control" rows="5"></textarea>
+                <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+                <div class="invalid-feedback">
+                    Please include a message in your email.
+                </div>
             </div>
             <div class="d-md-none d-grid gap-2">
                 <button type="submit" value="submit" class="btn btn-success fw-bold">
                     <i class="fas fa-paper-plane"></i>&#160;&#160;Send
                 </button>
             </div>
-            <div class="d-none d-md-block d-flex float-end">
-                <button type="submit" value="submit" class="btn btn-success fw-bold">
+            <div class="d-flex">
+                <button type="submit" value="submit" class="btn btn-success fw-bold ms-auto">
                     <i class="fas fa-paper-plane"></i>&#160;&#160;Send
                 </button>
             </div>
