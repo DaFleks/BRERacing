@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 py-lg-4 sticky-top shadow">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
     <div id="main-navbar" class="container">
         <!-- NAVBAR TOGGLER -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -30,7 +30,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact</a>
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -43,20 +43,31 @@
                         <li><a class="dropdown-item" href="#">Orders</a></li>
                         <li><a class="dropdown-item" href="/admin/products">Products</a></li>
                         <li><a class="dropdown-item" href="/admin/users">Users</a></li>
-                        <!-- <li>
-                                <hr class="dropdown-divider">
-                            </li> -->
                     </ul>
                 </li>
             </ul>
-
-            <!-- CART LG -->
-            <button id="lg-cart" class="btn btn-outline-light position-relative d-none d-lg-block">
-                <i class="fas fa-shopping-cart text-light"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    0
-                    <span class="visually-hidden">items in your cart.</span>
-            </button>
+            <ul class="navbar-nav text-center">
+                <li class="nav-item">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" class="nav-link"><i
+                            class="fas fa-user-plus"></i>&#160;&#160;Register</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="nav-link">
+                        <i class="fas fa-sign-in-alt"></i>&#160;&#160;Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <!-- CART LG -->
+                    <button id="lg-cart" class="btn btn-outline-light position-relative d-none d-lg-block me-2"
+                        style="top: 3px;">
+                        <i class="fas fa-shopping-cart text-light"></i>
+                        <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger"
+                            style="top: 5px;">
+                            0</span>
+                        <span class="visually-hidden">items in your cart.</span>
+                    </button>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>

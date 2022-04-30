@@ -1,0 +1,23 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row">
+    <div class="col-12 px-4 mx-auto">
+        <h1><i class="fas fa-envelope"></i>&#160;&#160;Login</h1>
+        <hr>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-8 px-4">
+        <form action="/login" method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="email">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password">
+            </div>
+        </form>
+    </div>
+</div>

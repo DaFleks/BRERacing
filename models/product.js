@@ -20,10 +20,13 @@ const ProductSchema = new Schema({
         default: 0
     },
     price: {
-        type: Schema.Types.Decimal128,
-        default: 0.00
+        type: Number,
+        default: 0.00,
+        min: 0.00
     },
-    details: [String],
+    details: {
+        type: String,
+    },
     published: {
         type: Boolean,
         default: false
@@ -38,6 +41,11 @@ const ProductSchema = new Schema({
         max: 100,
         default: 0
     },
+    discountedPrice: {
+        type: Number,
+        min: 0,
+        default: 0
+    } 
 }, {
     timestamps: true
 });

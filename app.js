@@ -8,6 +8,8 @@ const dbConnect = require('./dbConnect');
 const ExpressError = require('./utils/ExpressError');
 const contact = require('./routes/contact');
 const faqs = require('./routes/faqs');
+const register = require('./routes/register');
+const login = require('./routes/login');
 const adminFaqs = require('./routes/admin/faqs');
 const adminProducts = require('./routes/admin/products');
 const adminUsers = require('./routes/admin/users');
@@ -44,6 +46,8 @@ app.get('/', async (req, res) => {
 
 app.use('/contact', contact);
 app.use('/faqs', faqs);
+app.use('/register', register);
+app.use('/login', login);
 app.use('/admin/faqs', adminFaqs)
 app.use('/admin/products', adminProducts);
 app.use('/admin/users', adminUsers);

@@ -57,7 +57,7 @@ router.post('/', upload.single('image'), productValidate, catchAsync(async (req,
         sku: req.body.sku,
         stock: req.body.stock,
         price: req.body.price,
-        details: [''],
+        details: req.body.details,
         published: req.body.publish === 'true' ? true : false
     })
     if (req.file) {
@@ -110,7 +110,11 @@ router.put('/:id', upload.single('image'), productValidate, catchAsync(async (re
     product.sku = req.body.sku;
     product.stock = req.body.stock;
     product.price = req.body.price;
-    product.published = req.body.publish === 'true' ? true : false
+    product.published = req.body.publish === 'true' ? true : false;
+    product.isDiscounted = req.body.discountActive === 'true' ? true : false;
+    product.discountAmount = req.body.discountAmount;
+    product.discountedPrice = (req.body.price - (req.body.price * (req.body.discountAmount / 100))).toFixed(2);
+    product.details = req.body.details;
 
     await product.save();
     res.redirect('/admin/products');

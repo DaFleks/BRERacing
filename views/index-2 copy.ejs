@@ -1,0 +1,79 @@
+<% layout('layouts/boilerplate') %>
+
+<!-- <div class="row bg-light rounded border">
+        <div class="col-12 d-flex justify-content-around px-md-4">
+            <input id="search" class="w-100 px-1 fw-bold font-monospace" type="text" class="form-control" name="search"
+                id="search" placeholder="Search">
+            <div class="my-auto">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+    </div> -->
+
+<div class="row px-3">
+    <!-- PRODUCT -->
+    <% products.forEach((product) => { %>
+    <% if (product.published) { %>
+    <div class="col-12 mb-4 py-3 bg-light rounded">
+        <div class="row">
+            <!-- PRODUCT IMAGE -->
+            <div class="col-4 col-md-2 mb-3 mb-md-0">
+                <a href="/images/products/<%= product._id %>/<%= product.image %> ">
+                    <img class="productImg img-fluid rounded border" style="background-color: #FFFFFF;"
+                        src="/images/products/<%= product._id %>/<%= product.image %>" alt="<%= product.name %>">
+                </a>
+            </div>
+            <!-- PRODUCT INFO -->
+            <div class="col-8 col-md-7">
+                <!-- PRODUCT NAME -->
+                <div class="productName">
+                    <h3>
+                        <%= product.name %>
+                    </h3>
+                </div>
+                <!-- PRODUCT DETAILS -->
+                <div class="productDetails">
+                    <p>1/24 Scale Roll Cage for Slot Cars.</p>
+                </div>
+
+                <!-- PRODUCT PRICE-->
+                <div class="productPrice text-success d-flex">
+                    <% if (product.isDiscounted) { %>
+                    <h3 class="text-decoration-line-through text-danger me-3">
+                        $<%= product.price %>
+                    </h3>
+                    <h3>
+                        $<%= product.price - (product.price * (product.discountAmount / 100)).toFixed(2) %>
+                    </h3>
+                    <% } else { %>
+                    <h3>$<%= product.price %></h3>
+                    <% } %>
+                </div>
+            </div>
+            <!-- ADD TO CART -->
+            <div class="col-12 col-md-3 my-auto">
+                <div class="row">
+                    <!-- QUANTITY -->
+                    <div class="col-4 col-md-12 mb-md-3">
+                        <input class="form-control text-center" type="number" name="quantity" id="quantity" value="1">
+                    </div>
+                    <!-- ADD TO CART LG -->
+                    <div class="col-8 col-md-12 d-none d-md-block">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-success fw-bold">
+                                <i class="fas fa-cart-plus"></i>&#160;&#160;Add To Cart
+                            </button>
+                        </div>
+                    </div>
+                    <!-- ADD TO CART SM -->
+                    <div class="col-8 d-md-none d-flex align-items-end justify-content-end">
+                        <button class="btn btn-success fw-bold">
+                            <i class="fas fa-cart-plus"></i>&#160;&#160;Add To Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% }}) %>
+</div>

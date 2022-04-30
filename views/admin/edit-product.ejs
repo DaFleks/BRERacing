@@ -25,7 +25,7 @@
             <div class="row mb-3">
                 <div class="col-12 col-md-3">
                     <label class="form-label">Current Image:</label>
-                    <div class="mb-3 text-center bg-secondary py-4 rounded">
+                    <div class="mb-3 text-center bg-light py-4 rounded border">
                         <img class="img-fluid productImg rounded"
                             src="/images/products/<%= product.id %>/<%= product.image %>" alt="<%= product.name %>">
                     </div>
@@ -62,7 +62,7 @@
             </div>
             <div class="mb-3">
                 <label for="details" class="form-label">Details</label>
-                <textarea name="details" id="details" rows="5" class="form-control"></textarea>
+                <textarea name="details" id="details" rows="5" class="form-control"><%= product.details %></textarea>
             </div>
             <div class="row">
                 <div class="col-12 col-md-4 my-auto">
@@ -75,7 +75,8 @@
                 <div class="col-12 col-md-4 my-auto">
                     <div class="mb-3">
                         <label for="publish">Discount Active&#160;&#160;</label>
-                        <input type="checkbox" <%= product.isDiscounted ? "checked" : "" %> value="true" />
+                        <input type="checkbox" name="discountActive" id="discountActive"
+                            <%= product.isDiscounted ? "checked" : "" %> value="true" />
                     </div>
                 </div>
                 <div class="col-12 col-md-4">

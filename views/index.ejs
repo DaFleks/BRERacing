@@ -1,70 +1,67 @@
 <% layout('layouts/boilerplate') %>
 
-<!-- <div class="row bg-light rounded border">
-        <div class="col-12 d-flex justify-content-around px-md-4">
-            <input id="search" class="w-100 px-1 fw-bold font-monospace" type="text" class="form-control" name="search"
-                id="search" placeholder="Search">
-            <div class="my-auto">
-                <i class="fas fa-search"></i>
-            </div>
-        </div>
-    </div> -->
-
-<div class="row px-3">
-    <!-- PRODUCT -->
+<div class="row">
     <% products.forEach((product) => { %>
     <% if (product.published) { %>
-    <div class="col-12 mb-4 py-3 border bg-light rounded">
-        <div class="row">
-            <!-- PRODUCT IMAGE -->
-            <div class="col-4 col-md-2 mb-3 mb-md-0" >
-                <a href="/images/products/<%= product._id %>/<%= product.image %> ">
-                    <img class="productImg img-fluid rounded border" style="background-color: #FFFFFF;"
-                        src="/images/products/<%= product._id %>/<%= product.image %>" alt="<%= product.name %>">
-                </a>
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="card mb-4 px-3 pt-3 border-top shadow" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-4 col-md-12">
+                    <div class="product-img border rounded bg-light">
+                        <img src="/images/products/<%= product._id %>/<%= product.image %>" class="my-auto">
+                    </div>
+                </div>
+                <div class="col-8 col-md-12 mt-md-3">
+                    <div class="card-body p-0 ps-3 ps-md-0">
+                        <h5 class="card-title"><%= product.name %></h5>
+                        <p class="card-text"><%= product.details %></p>
+                    </div>
+                </div>
             </div>
-            <!-- PRODUCT INFO -->
-            <div class="col-8 col-md-7">
-                <!-- PRODUCT NAME -->
-                <div class="productName">
+            <hr>
+            <div class="row g-0">
+                <div class="col-12">
+                    <div class=" col-12 mb-2">
+                        <h6 class="mb-0">
+                            <% if (product.stock > 0) { %>
+                            Stock: <span class="text-success"><%= product.stock %></span>
+                            <% } else { %>
+                            <span class="text-danger">Out of Stock</span>
+                            <% } %>
+                        </h6>
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <% if (!product.isDiscounted) { %>
+                    <h3 class="text-success">$<%= product.price %></h3>
+                    <% } else { %>
                     <h3>
-                        <%= product.name %>
+                        <span class="text-danger text-decoration-line-through">$<%= product.price %></span>
+                        <span class="text-success">$<%= product.discountedPrice.toFixed(2) %></span>
                     </h3>
+                    <% } %>
                 </div>
-                <!-- PRODUCT DETAILS -->
-                <div class="productDetails">
-                    <p>1/24 Scale Roll Cage for Slot Cars.</p>
-                </div>
-
-                <!-- PRODUCT PRICE-->
-                <div class="productPrice text-success">
-                    <h3>$<%= product.price %></h3>
-                </div>
-            </div>
-            <!-- ADD TO CART -->
-            <div class="col-12 col-md-3 my-auto">
-                <div class="row">
-                    <!-- QUANTITY -->
-                    <div class="col-4 col-md-12 mb-md-3">
-                        <input class="form-control text-center" type="number" name="quantity" id="quantity" value="1">
-                    </div>
-                    <!-- ADD TO CART LG -->
-                    <div class="col-8 col-md-12 d-none d-md-block">
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-success fw-bold">
-                                <i class="fas fa-cart-plus"></i>&#160;&#160;Add To Cart
-                            </button>
+                <div class="col-12">
+                    <form action="">
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="number" class="form-control mb-3 text-center" min="1" name="quantity"
+                                    id="quantity" value="1">
+                            </div>
+                            <div class="col-8">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-success">
+                                        <i class="fas fa-cart-plus"></i>&#160;&#160;Add to Cart
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <!-- ADD TO CART SM -->
-                    <div class="col-8 d-md-none d-flex align-items-end justify-content-end">
-                        <button class="btn btn-success fw-bold">
-                            <i class="fas fa-cart-plus"></i>&#160;&#160;Add To Cart
-                        </button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <% }}) %>
+    <% } %>
+
+    <% }) %>
 </div>
