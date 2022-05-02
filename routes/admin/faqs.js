@@ -5,6 +5,9 @@ const ExpressError = require('../../utils/ExpressError');
 const {
     faqSchema
 } = require('../../utils/JoiSchemas');
+const {
+    isLoggedIn, isAdmin
+} = require('../../utils/middleware');
 const router = express.Router();
 
 const validateFaq = (req, res, next) => {
@@ -20,7 +23,7 @@ const validateFaq = (req, res, next) => {
 }
 
 //  ADMIN - FAQS LIST
-router.get('/', catchAsync(async (req, res) => {
+router.get('/', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
     const faqs = await Faq.find({});
     res.render('admin/faqs-list', {
         faqs
@@ -28,12 +31,12 @@ router.get('/', catchAsync(async (req, res) => {
 }))
 
 //  ADMIN - ADD FAQ
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, isAdmin, (req, res) => {
     res.render('admin/add-faq');
 })
 
 //  ADMIN - ADD FAQ POST
-router.post('/', validateFaq, catchAsync(async (req, res) => {
+router.post('/', isLoggedIn, isAdmin, validateFaq, catchAsync(async (req, res) => {
     const faq = new Faq({
         title: req.body.title,
         comment: req.body.comment
@@ -43,7 +46,7 @@ router.post('/', validateFaq, catchAsync(async (req, res) => {
 }))
 
 //  ADMIN - EDIT FAQ
-router.get('/:id', catchAsync(async (req, res) => {
+router.get('/:id', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
     const faq = await Faq.findOne({
         _id: req.params.id
     })
@@ -54,7 +57,7 @@ router.get('/:id', catchAsync(async (req, res) => {
 }))
 
 //  ADMIN - EDIT FAQ POST
-router.put('/:id', validateFaq, catchAsync(async (req, res) => {
+router.put('/:id', isLoggedIn, isAdmin, validateFaq, catchAsync(async (req, res) => {
     const faq = await Faq.findOne({
         _id: req.params.id
     });
@@ -67,7 +70,7 @@ router.put('/:id', validateFaq, catchAsync(async (req, res) => {
 }))
 
 //  ADMIN - DELETE FAQ
-router.delete('/:id', catchAsync(async (req, res) => {
+router.delete('/:id', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
     await Faq.findByIdAndDelete(req.params.id);
     res.redirect('/admin/faqs');
 }));

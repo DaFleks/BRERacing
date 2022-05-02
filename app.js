@@ -3,16 +3,26 @@ const express = require('express');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
+const flash = require('connect-flash');
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
 const Product = require('./models/product');
 const dbConnect = require('./dbConnect');
 const ExpressError = require('./utils/ExpressError');
-const contact = require('./routes/contact');
-const faqs = require('./routes/faqs');
-const register = require('./routes/register');
-const login = require('./routes/login');
-const adminFaqs = require('./routes/admin/faqs');
-const adminProducts = require('./routes/admin/products');
-const adminUsers = require('./routes/admin/users');
+
+//  ROUTES
+const contactRoutes = require('./routes/contact');
+const faqsRoutes = require('./routes/faqs');
+const registerRoutes = require('./routes/register');
+const loginRoutes = require('./routes/login');
+const adminFaqsRoutes = require('./routes/admin/faqs');
+const adminProductsRoutes = require('./routes/admin/products');
+const adminUsersRoutes = require('./routes/admin/users');
+const cart = require('./routes/cart');
+
+//  VARS
 require('dotenv').config({
     path: './vars.env'
 });
@@ -35,6 +45,36 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use(methodOverride('_method'));
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24,
+        maxAge: 1000 * 60 * 60 * 24
+    }
+}))
+app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy({
+    usernameField: 'email'
+}, User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    res.locals.warning = req.flash('warning');
+    res.locals.currentUser = req.user;
+    res.locals.cartQty = req.session.cartQty || 0;
+    res.locals.cart = req.session.cart;
+    res.locals.cartSubtotal = req.session.cartSubtotal || 0.00;
+    next();
+})
 
 //  HOMEPAGE (ALL PRODUCTS LISTED)
 app.get('/', async (req, res) => {
@@ -44,13 +84,25 @@ app.get('/', async (req, res) => {
     });
 });
 
-app.use('/contact', contact);
-app.use('/faqs', faqs);
-app.use('/register', register);
-app.use('/login', login);
-app.use('/admin/faqs', adminFaqs)
-app.use('/admin/products', adminProducts);
-app.use('/admin/users', adminUsers);
+app.use('/contact', contactRoutes);
+app.use('/faqs', faqsRoutes);
+app.use('/register', registerRoutes);
+app.use('/login', loginRoutes);
+app.use('/admin/faqs', adminFaqsRoutes)
+app.use('/admin/products', adminProductsRoutes);
+app.use('/admin/users', adminUsersRoutes);
+app.use('/cart', cart);
+
+app.get('/logout', (req, res) => {
+    if (!req.isAuthenticated()) {
+        req.flash('error', 'You were not signed in to begin with.');
+        return res.redirect('/');
+    }
+
+    req.logout();
+    req.flash('success', 'You have been signed out.');
+    res.redirect('/');
+})
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404));
@@ -61,7 +113,7 @@ app.use((err, req, res, next) => {
     const {
         statusCode = 500
     } = err;
-    console.dir(err);
+
     if (!err.message) err.message = 'Oops! Something went wrong!';
 
     res.status(statusCode).render('error', {

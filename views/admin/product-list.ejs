@@ -19,8 +19,10 @@
         </div>
         <hr>
     </div>
-
-    <div class="col-12">
+    <div class="col-12 px-4">
+        <%- include('../partials/flash') %>
+    </div>
+    <div class="col-12 px-4">
         <div class="table-responsive">
             <table class="table table-hover table-striped text-center align-middle">
                 <thead>
@@ -32,7 +34,6 @@
                         <th style="width: 9%;">Price</th>
                         <th style="width: 9%;">Published</th>
                         <th style="width: 9%;">Discounted</th>
-                        <th style="width: 9%;">Disc Amt.</th>
                         <th style="width: 9%;">Edit</th>
                         <th style="width: 9%;">Delete</th>
                     </tr>
@@ -64,9 +65,6 @@
                         </td>
                         <td>
                             <input type="checkbox" disabled <%= product.isDiscounted ? "checked" : "" %> />
-                        </td>
-                        <td>
-                            <%= product.discountAmount %>%
                         </td>
                         <td>
                             <a href="/admin/products/<%= product._id %>" class="btn btn-primary">

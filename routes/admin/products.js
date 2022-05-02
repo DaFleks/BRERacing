@@ -9,6 +9,7 @@ const {
 } = require('../../utils/JoiSchemas');
 const catchAsync = require('../../utils/catchAsync');
 const ExpressError = require('../../utils/ExpressError');
+const {isLoggedIn, isAdmin} = require('../../utils/middleware');
 const router = express.Router();
 
 const productValidate = (req, res, next) => {
@@ -37,7 +38,7 @@ const upload = multer({
 });
 
 //  ADMIN - PRODUCT LIST
-router.get('/', async (req, res) => {
+router.get('/', isLoggedIn, isAdmin, async (req, res) => {
     const products = await Product.find({});
     res.render('admin/product-list', {
         products
@@ -45,12 +46,12 @@ router.get('/', async (req, res) => {
 });
 
 //  ADMIN - ADD PRODUCT
-router.get('/add', (req, res) => {
+router.get('/add', isLoggedIn, isAdmin, (req, res) => {
     res.render('admin/add-product');
 })
 
 //  ADMIN - ADD PRODUCT POST
-router.post('/', upload.single('image'), productValidate, catchAsync(async (req, res) => {
+router.post('/', isLoggedIn, isAdmin, upload.single('image'), productValidate, catchAsync(async (req, res) => {
     const product = new Product({
         name: req.body.name,
         image: '',
@@ -72,11 +73,12 @@ router.post('/', upload.single('image'), productValidate, catchAsync(async (req,
     }
 
     await product.save();
+    req.flash('success', 'Successfully made a new product!');
     res.redirect('/admin/products');
 }));
 
 //  ADMIN - UPDATE PRODUCT
-router.get('/:id', async (req, res) => {
+router.get('/:id', isLoggedIn, isAdmin, async (req, res) => {
     const product = await Product.findOne({
         _id: req.params.id
     });
@@ -86,7 +88,7 @@ router.get('/:id', async (req, res) => {
 });
 
 //  ADMIN - UPDATE PRODUCT POST
-router.put('/:id', upload.single('image'), productValidate, catchAsync(async (req, res) => {
+router.put('/:id', isLoggedIn, isAdmin, upload.single('image'), productValidate, catchAsync(async (req, res) => {
     const product = await Product.findOne({
         _id: req.params.id
     })
@@ -113,15 +115,16 @@ router.put('/:id', upload.single('image'), productValidate, catchAsync(async (re
     product.published = req.body.publish === 'true' ? true : false;
     product.isDiscounted = req.body.discountActive === 'true' ? true : false;
     product.discountAmount = req.body.discountAmount;
-    product.discountedPrice = (req.body.price - (req.body.price * (req.body.discountAmount / 100))).toFixed(2);
+    product.discountedPrice = parseFloat(req.body.price) - (parseFloat(req.body.price) * (parseFloat(req.body.discountAmount) / parseFloat(100)));
     product.details = req.body.details;
 
     await product.save();
+    req.flash('success', 'Successfully updated product!');
     res.redirect('/admin/products');
 }))
 
 //  ADMIN - DELETE PRODUCT
-router.delete('/:id', catchAsync(async (req, res) => {
+router.delete('/:id', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
     fs.rm('./public/images/products/' + req.params.id, {
         recursive: true
     }, (err) => {
@@ -132,6 +135,7 @@ router.delete('/:id', catchAsync(async (req, res) => {
     await Product.deleteOne({
         _id: req.params.id
     });
+    req.flash('success', 'Successfully deleted product!');
     res.redirect('/admin/products');
 }));
 

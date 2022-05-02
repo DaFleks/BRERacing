@@ -21,7 +21,7 @@
 
         <!-- NAVBAR ITEMS -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
+            <ul class="navbar-nav mb-2 mb-lg-0 text-center">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
@@ -32,6 +32,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</a>
                 </li>
+                <% if (currentUser && currentUser.userLevel === 2) { %>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -45,8 +46,10 @@
                         <li><a class="dropdown-item" href="/admin/users">Users</a></li>
                     </ul>
                 </li>
+                <% } %>
             </ul>
-            <ul class="navbar-nav text-center">
+            <ul class="navbar-nav ms-auto text-center">
+                <% if (!currentUser) { %>
                 <li class="nav-item">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" class="nav-link"><i
                             class="fas fa-user-plus"></i>&#160;&#160;Register</a>
@@ -56,14 +59,36 @@
                         <i class="fas fa-sign-in-alt"></i>&#160;&#160;Login
                     </a>
                 </li>
+                <% } else { %>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <%if (currentUser.userLevel === 2) { %>
+                        <i class="fas fa-crown"></i>&#160;&#160;
+                        <% } else { %>
+                        <i class="fas fa-user-circle"></i>&#160;&#160;
+                        <% } %>
+                        <%= currentUser.firstName %>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark w-25 mx-auto text-center"
+                        aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/admin/faqs">Profile</a></li>
+                        <li><a class="dropdown-item" href="/admin/faqs">Orders</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item">
-                    <!-- CART LG -->
+                    <a href="/logout" class="nav-link">
+                        <i class="fas fa-sign-out-alt"></i>&#160;&#160;Logout
+                    </a>
+                </li>
+                <% } %>
+                <!-- CART LG -->
+                <li class="nav-item">
                     <button id="lg-cart" class="btn btn-outline-light position-relative d-none d-lg-block me-2"
-                        style="top: 3px;">
+                        style="top: 3px;" data-bs-toggle="modal" data-bs-target="#cartModal">
                         <i class="fas fa-shopping-cart text-light"></i>
                         <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger"
-                            style="top: 5px;">
-                            0</span>
+                            style="top: 5px;"><%= cartQty %></span>
                         <span class="visually-hidden">items in your cart.</span>
                     </button>
                 </li>

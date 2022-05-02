@@ -13,7 +13,8 @@ const validateUser = (req, res, next) => {
     } = registerSchema.validate(req.body);
 
     if (error) {
-        throw new ExpressError(error.message, 400);
+        req.flash('error', error.message);
+        return res.redirect('/');
     } else {
         next();
     }
@@ -25,10 +26,13 @@ router.get('/', (req, res) => {
 
 router.post('/', validateUser, catchAsync(async (req, res) => {
     try {
+        const {
+            password
+        } = req.body;
+
         const newUser = new User({
             userLevel: 1,
             email: req.body.email,
-            password: req.body.password,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             street: req.body.street != undefined ? req.body.street : '',
@@ -36,14 +40,20 @@ router.post('/', validateUser, catchAsync(async (req, res) => {
             state: req.body.state != undefined ? req.body.state : '',
             zip: req.body.zip != undefined ? req.body.zip : ''
         })
-        await newUser.save();
+
+        const registeredUser = await User.register(newUser, password);
+        req.login(registeredUser, err => {
+            if (err) {
+                req.flash('error', err.message);
+                return res.redirect('/');
+            }
+        })
+
     } catch (error) {
-        if (error.code === 11000) {
-            throw new ExpressError('An account already exists with that email.', 400);
-        } else {
-            throw new ExpressError(error, 400);
-        }
+        req.flash('error', error.message);
+        return res.redirect('/');
     }
+    req.flash('success', 'Hi ' + req.user.firstName + '! You are now signed in!');
     res.redirect('/');
 }))
 

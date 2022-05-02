@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -6,10 +7,6 @@ const UserSchema = new Schema({
         type: String,
         unique: true,
         required: true
-    },
-    password: {
-        type: String,
-        required: true,
     },
     firstName: {
         type: String,
@@ -47,5 +44,14 @@ const UserSchema = new Schema({
 }, {
     timestamps: true
 });
+
+const options = {
+    usernameField: 'email',
+    errorMessages: {
+        UserExistsError: 'An account with the provided email is already in use.'
+    }
+}
+
+UserSchema.plugin(passportLocalMongoose, options);
 
 module.exports = mongoose.model('User', UserSchema);

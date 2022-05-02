@@ -5,6 +5,10 @@ const ExpressError = require('../../utils/ExpressError');
 const {
     userSchema
 } = require('../../utils/JoiSchemas');
+const {
+    isLoggedIn,
+    isAdmin
+} = require('../../utils/middleware');
 const router = express.Router();
 
 const validateUser = (req, res, next) => {
@@ -20,21 +24,20 @@ const validateUser = (req, res, next) => {
 }
 
 //  ADMIN - GET ALL USERS
-router.get('/', catchAsync(async (req, res) => {
+router.get('/', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
     const users = await User.find({});
-
     res.render('admin/users-list', {
         users
     });
 }));
 
 //  ADMIN - CREATE NEW USER
-router.get('/new', catchAsync(async (req, res) => {
+router.get('/new', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
     res.render('admin/add-user');
 }));
 
 //  ADMIN - CREATE NEW USER POST
-router.post('/', validateUser, catchAsync(async (req, res) => {
+router.post('/', isLoggedIn, isAdmin, validateUser, catchAsync(async (req, res) => {
     try {
         const newUser = new User({
             email: req.body.email,
@@ -59,7 +62,7 @@ router.post('/', validateUser, catchAsync(async (req, res) => {
 }));
 
 //  ADMIN - UPDATE USER
-router.get('/:id', catchAsync(async (req, res) => {
+router.get('/:id', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
     const user = await User.findById(req.params.id);
     res.render('admin/edit-user', {
         user
@@ -67,7 +70,7 @@ router.get('/:id', catchAsync(async (req, res) => {
 }));
 
 //  ADMIN - UPDATE USER POST
-router.put('/:id', catchAsync(async (req, res) => {
+router.put('/:id', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
     const user = await User.findOne({
         _id: req.params.id
     });
@@ -85,7 +88,7 @@ router.put('/:id', catchAsync(async (req, res) => {
 }))
 
 //  ADMIN - DELETE USER
-router.delete('/:id', catchAsync(async (req, res) => {
+router.delete('/:id', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
     await User.deleteOne({
         _id: req.params.id
     });

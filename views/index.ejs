@@ -1,6 +1,9 @@
 <% layout('layouts/boilerplate') %>
 
 <div class="row">
+    <div class="col-12">
+        <%- include('partials/flash') %>
+    </div>
     <% products.forEach((product) => { %>
     <% if (product.published) { %>
     <div class="col-12 col-md-6 col-lg-4">
@@ -37,20 +40,22 @@
                     <% } else { %>
                     <h3>
                         <span class="text-danger text-decoration-line-through">$<%= product.price %></span>
-                        <span class="text-success">$<%= product.discountedPrice.toFixed(2) %></span>
+                        <span class="text-success">$<%= product.discountedPrice %></span>
                     </h3>
                     <% } %>
                 </div>
                 <div class="col-12">
-                    <form action="">
+                    <form action="/cart" method="POST">
+                        <input type="hidden" name="productID" id="productID-<%= product._id%>" value=<%= product._id%>>
                         <div class="row">
                             <div class="col-4">
                                 <input type="number" class="form-control mb-3 text-center" min="1" name="quantity"
-                                    id="quantity" value="1">
+                                    id="quantity-<%= product._id %>" value="1">
                             </div>
                             <div class="col-8">
                                 <div class="d-grid gap-2">
-                                    <button class="btn btn-success">
+                                    <input type="hidden" value=<%= product._id %>>
+                                    <button class="btn btn-success add-to-cart">
                                         <i class="fas fa-cart-plus"></i>&#160;&#160;Add to Cart
                                     </button>
                                 </div>
@@ -61,7 +66,5 @@
             </div>
         </div>
     </div>
-    <% } %>
-
-    <% }) %>
+    <% }}) %>
 </div>
