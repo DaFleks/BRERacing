@@ -11,10 +11,9 @@ const OrderSchema = new Schema({
         unique: true
     },
     orderStatus: {
-        type: Number,
-        min: 0,
-        max: 3,
-        default: 0,
+        type: String,
+        emum: ['Processing', 'Shipped', 'Canceled', 'Hold'],
+        default: 'Processing',
         required: true
     },
     firstName: {
