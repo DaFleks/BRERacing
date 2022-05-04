@@ -1,0 +1,48 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row">
+    <div class="col-12 px-3 mx-auto">
+        <h1><i class="fas fa-truck"></i>&#160;&#160;Your Orders</h1>
+        <hr>
+    </div>
+
+    <% user.orders.forEach((order) => { %>
+    <div class="col-12
+    <% if (user.orders.length > 1) { %>
+        col-md-6 
+    <% } %> px-4 mb-3">
+        <div class="row mb-2 shadow py-4 border rounded order-tab" style="background-color: #FFFFFF;">
+            <div class="col-2 text-center my-auto border-end">
+                <p class="mb-0 fw-bold">Dec</p>
+                <h1 class="mb-0 fst-italic text-danger">02</h1>
+                <p class="mb-0 fw-bold">2017</p>
+            </div>
+            <div class="col-6 my-auto ps-3 ps-md-4">
+                <p class="order-number mb-0">Order No.: <span class="fw-bold"><%= order.orderNumber %></span></p>
+                <h4 class="order-name mb-0 text-break"><%= order.firstName %>&#160;<%= order.lastName %></h4>
+                <p class="order-email mb-0"><%= order.email %></p>
+                <p class="order-status fw-bold mb-0">Status:
+                    <% if (order.orderStatus === 0) { %>
+                    <span class="text-warning">Processing</span>
+                    <% } else if (order.orderStatus === 1) { %>
+                    <span class="text-success">Shipped</span>
+                    <% } else if (order.orderStatus === 2) { %>
+                    <span class="text-danger">Canceled</span>
+                    <% } else { %>
+                    <span class="text-warning">Hold</span>
+                    <% } %>
+                </p>
+            </div>
+            <div class="col-3 text-center my-auto">
+                <p class="mb-0">Total</p>
+                <h5 class="mb-0 text-break">$<%= order.total %></h5>
+            </div>
+            <div class="col-1 my-auto">
+                <a href="/order/<%= order._id %>" class="text-secondary">
+                    <i class="fas fa-angle-double-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <% }) %>
+</div>

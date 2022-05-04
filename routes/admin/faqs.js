@@ -26,7 +26,8 @@ const validateFaq = (req, res, next) => {
 router.get('/', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
     const faqs = await Faq.find({});
     res.render('admin/faqs-list', {
-        faqs
+        faqs,
+        title: 'Admin > FAQs'
     })
 }))
 

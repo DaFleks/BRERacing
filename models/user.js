@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 const Schema = mongoose.Schema;
+const dbConnect = require('../dbConnect');
+
+// dbConnect.connect();
 
 const UserSchema = new Schema({
     email: {
@@ -29,11 +32,14 @@ const UserSchema = new Schema({
     },
     zip: {
         type: String,
-        maxlength: 5,
+        maxlength: 7,
         uppercase: true
     },
     cart: [String],
-    orders: [String],
+    orders: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Order'
+    }],
     userLevel: {
         type: Number,
         min: 0,
@@ -54,4 +60,25 @@ const options = {
 
 UserSchema.plugin(passportLocalMongoose, options);
 
-module.exports = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
+
+// const user = new User({
+//     email: 'petropoulosalex@gmail.com',
+//     firstName: 'Alex',
+//     lastName: 'Petropoulos',
+//     street: '84 Bude Street',
+//     city: 'Toronto',
+//     state: 'ON',
+//     zip: 'M6C 1X8',
+//     orders: [
+//         '626f6dce05e2b8b1ca68e919'
+//     ],
+//     userLevel: 2
+// })
+
+// User.register(user, 'W4tgr33e3#')
+//     .then(() => {
+//     }).catch((e) => {
+//     });
+
+module.exports = User;

@@ -7,7 +7,8 @@ const router = express.Router();
 router.get('/', catchAsync(async (req, res) => {
     const faqs = await Faq.find({});
     res.render('faqs', {
-        faqs
+        faqs,
+        title: 'FAQs'
     })
 }))
 

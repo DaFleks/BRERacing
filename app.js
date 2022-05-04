@@ -21,6 +21,9 @@ const adminFaqsRoutes = require('./routes/admin/faqs');
 const adminProductsRoutes = require('./routes/admin/products');
 const adminUsersRoutes = require('./routes/admin/users');
 const cart = require('./routes/cart');
+const checkout = require('./routes/checkout');
+const orders = require('./routes/orders');
+const order = require('./routes/order');
 
 //  VARS
 require('dotenv').config({
@@ -80,7 +83,8 @@ app.use((req, res, next) => {
 app.get('/', async (req, res) => {
     const products = await Product.find({});
     res.render('index', {
-        products
+        products, 
+        title: 'Slot Car Parts'
     });
 });
 
@@ -88,10 +92,13 @@ app.use('/contact', contactRoutes);
 app.use('/faqs', faqsRoutes);
 app.use('/register', registerRoutes);
 app.use('/login', loginRoutes);
-app.use('/admin/faqs', adminFaqsRoutes)
+app.use('/admin/faqs', adminFaqsRoutes);
 app.use('/admin/products', adminProductsRoutes);
 app.use('/admin/users', adminUsersRoutes);
 app.use('/cart', cart);
+app.use('/checkout', checkout);
+app.use('/orders', orders);
+app.use('/order', order);
 
 app.get('/logout', (req, res) => {
     if (!req.isAuthenticated()) {

@@ -1,0 +1,76 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="col-12 px-3 mx-auto">
+    <h1><i class="fas fa-truck"></i>&#160;&#160;Order Details</h1>
+    <hr>
+</div>
+
+<div class="col-md-8 px-3 order-details">
+    <div class="row mb-3">
+        <div class="col-6">
+            <p class="mb-0"><span class="fw-bold">Order Number:&#160;</span></p>
+            <p class="mb-0"><%= order.orderNumber %></p>
+        </div>
+        <div class="col-6 text-end">
+            <p class="mb-0"><span class="fw-bold">Order Date:</p>
+            <p class="mb-0">2022-02-15</p>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <p class="mb-0">
+                <span class="fw-bold">Order Status:&#160;
+                    <% if (order.orderStatus === 0) { %>
+                    <span class="text-warning">Processing</span>
+                    <% } else if (order.orderStatus === 1) { %>
+                    <span class="text-success">Shipped</span>
+                    <% } else if (order.orderStatus === 2) { %>
+                    <span class="text-danger">Canceled</span>
+                    <% } else { %>
+                    <span class="text-warning">Hold</span>
+                    <% } %>
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <p class="fw-bold mb-0">Ship To:</p>
+            <p class="mb-0"><%= order.firstName %>&#160;<%= order.lastName %></p>
+            <p class="mb-0"><%= order.street %></p>
+            <p class="mb-0"><%= order.city %>, <%= order.state %></p>
+            <p class="mb-0"><%= order.zip %></p>
+            <p class="mb-0"><%= order.email %></p>
+        </div>
+    </div>
+
+    <% order.orderItems.forEach((item) => { %>
+    <div class="row mb-4 border-bottom py-2">
+        <div class="col-8">
+            <h6><%= item.name %></h6>
+            <p class="mb-0"><span class="fw-bold">LIN:</span>&#160;<%= item.lin %></p>
+            <p class="mb-0"><span class="fw-bold">SKU:</span>&#160;<%= item.sku %></p>
+            <p class="mb-3"><span class="fw-bold">Qty:</span>&#160;<%= item.quantity %></p>
+        </div>
+        <div class="col-4 my-auto text-end">
+            <h6>$<%= item.price %></h6>
+        </div>
+    </div>
+    <% }) %>
+
+    <div class="row">
+        <div class="col-6">
+            <h6 class="mb-1 fw-bold">Subtotal:&#160;</h6>
+            <h6 class="mb-3 fw-bold">Shipping:&#160;</h6>
+            <h6 class="mb-1 fw-bold">Total:&#160;</h6>
+        </div>
+        <div class="col-6 text-end">
+            <h6 class="mb-1">$<%= order.subtotal %></h6>
+            <h6 class="mb-3">$<%= order.shippingCost.toFixed(2) %></h6>
+            <h6 class="mb-1 text-success">$<%= order.total %></h6>
+        </div>
+    </div>
+
+</div>

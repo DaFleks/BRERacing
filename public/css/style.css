@@ -55,7 +55,13 @@ textarea {
     height: 100%;
 }
 
+.order-number, .order-email, .order-status {
+    font-size: 0.9rem;
+}
 
+.order-details {
+    font-size: 0.8rem;
+}
 
 @media only screen and (max-width: 576px) {
     .productDetails {
@@ -64,6 +70,10 @@ textarea {
 
     .card-text {
         overflow: scroll;
+    }
+
+    #checkoutTable {
+
     }
 }
 
@@ -74,6 +84,19 @@ textarea {
 
     .product-img {
         height: 200px;
+    }
+
+    #checkoutOrder {
+        border-left: 1px solid #dee2e6;
+    }
+
+    .add-to-cart {
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+
+    .order-details {
+        font-size: 1.0rem;
     }
 }
 

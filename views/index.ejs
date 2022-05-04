@@ -23,36 +23,44 @@
             </div>
             <hr>
             <div class="row g-0">
-                <div class="col-12">
-                    <div class=" col-12 mb-2">
-                        <h6 class="mb-0">
-                            <% if (product.stock > 0) { %>
-                            Stock: <span class="text-success"><%= product.stock %></span>
+                <div class="col-6 my-auto">
+                    <div class="row">
+                        <div class="col-12 mb-1">
+                            <h6 class="mb-0">
+                                <% if (product.stock > 0) { %>
+                                Stock: <span class="text-success"><%= product.stock %></span>
+                                <% } else { %>
+                                <span class="text-danger">Out of Stock</span>
+                                <% } %>
+                            </h6>
+                        </div>
+                        <div class="col-12">
+                            <% if (!product.isDiscounted) { %>
+                            <h1 class="d-md-none text-success">$<%= product.price.toFixed(2) %></h1>
+                            <h4 class="d-none d-md-block text-success">$<%= product.price.toFixed(2) %></h4>
                             <% } else { %>
-                            <span class="text-danger">Out of Stock</span>
+                            <h1 class="d-md-none">
+                                <span class="text-danger text-decoration-line-through">$<%= product.price.toFixed(2) %></span>
+                                <span class="text-success">$<%= product.discountedPrice.toFixed(2) %></span>
+                            </h1>
+                            <h4 class="d-none d-md-block">
+                                <span class="text-danger text-decoration-line-through">$<%= product.price %></span>
+                                <span class="text-success">$<%= product.discountedPrice.toFixed(2) %></span>
+                            </h4>
                             <% } %>
-                        </h6>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12 mb-3">
-                    <% if (!product.isDiscounted) { %>
-                    <h3 class="text-success">$<%= product.price %></h3>
-                    <% } else { %>
-                    <h3>
-                        <span class="text-danger text-decoration-line-through">$<%= product.price %></span>
-                        <span class="text-success">$<%= product.discountedPrice %></span>
-                    </h3>
-                    <% } %>
-                </div>
-                <div class="col-12">
+
+                <div class="col-6 mb-3">
                     <form action="/cart" method="POST">
                         <input type="hidden" name="productID" id="productID-<%= product._id%>" value=<%= product._id%>>
                         <div class="row">
-                            <div class="col-4">
-                                <input type="number" class="form-control mb-3 text-center" min="1" name="quantity"
+                            <div class="col-12 mb-3">
+                                <input type="number" class="form-control text-center" min="1" name="quantity"
                                     id="quantity-<%= product._id %>" value="1">
                             </div>
-                            <div class="col-8">
+                            <div class="col-12">
                                 <div class="d-grid gap-2">
                                     <input type="hidden" value=<%= product._id %>>
                                     <button class="btn btn-success add-to-cart">

@@ -9,7 +9,10 @@ const {
 } = require('../../utils/JoiSchemas');
 const catchAsync = require('../../utils/catchAsync');
 const ExpressError = require('../../utils/ExpressError');
-const {isLoggedIn, isAdmin} = require('../../utils/middleware');
+const {
+    isLoggedIn,
+    isAdmin
+} = require('../../utils/middleware');
 const router = express.Router();
 
 const productValidate = (req, res, next) => {
@@ -41,13 +44,16 @@ const upload = multer({
 router.get('/', isLoggedIn, isAdmin, async (req, res) => {
     const products = await Product.find({});
     res.render('admin/product-list', {
-        products
+        products,
+        title: 'Admin > Product List'
     });
 });
 
 //  ADMIN - ADD PRODUCT
 router.get('/add', isLoggedIn, isAdmin, (req, res) => {
-    res.render('admin/add-product');
+    res.render('admin/add-product', {
+        title: 'Admin > Add Product'
+    });
 })
 
 //  ADMIN - ADD PRODUCT POST
@@ -57,7 +63,7 @@ router.post('/', isLoggedIn, isAdmin, upload.single('image'), productValidate, c
         image: '',
         sku: req.body.sku,
         stock: req.body.stock,
-        price: req.body.price,
+        price: parseFloat(req.body.price).toFixed(2),
         details: req.body.details,
         published: req.body.publish === 'true' ? true : false
     })
@@ -83,7 +89,8 @@ router.get('/:id', isLoggedIn, isAdmin, async (req, res) => {
         _id: req.params.id
     });
     res.render('admin/edit-product', {
-        product
+        product,
+        title: 'Admin > Update Product'
     })
 });
 
@@ -111,11 +118,11 @@ router.put('/:id', isLoggedIn, isAdmin, upload.single('image'), productValidate,
     product.name = req.body.name;
     product.sku = req.body.sku;
     product.stock = req.body.stock;
-    product.price = req.body.price;
+    product.price = parseFloat(req.body.price).toFixed(2);
     product.published = req.body.publish === 'true' ? true : false;
     product.isDiscounted = req.body.discountActive === 'true' ? true : false;
     product.discountAmount = req.body.discountAmount;
-    product.discountedPrice = parseFloat(req.body.price) - (parseFloat(req.body.price) * (parseFloat(req.body.discountAmount) / parseFloat(100)));
+    product.discountedPrice = (parseFloat(req.body.price) - (parseFloat(req.body.price) * (parseFloat(req.body.discountAmount) / parseFloat(100)))).toFixed(2);
     product.details = req.body.details;
 
     await product.save();

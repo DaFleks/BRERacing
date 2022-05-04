@@ -27,13 +27,16 @@ const validateUser = (req, res, next) => {
 router.get('/', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
     const users = await User.find({});
     res.render('admin/users-list', {
-        users
+        users,
+        title: 'Admin > User List'
     });
 }));
 
 //  ADMIN - CREATE NEW USER
 router.get('/new', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
-    res.render('admin/add-user');
+    res.render('admin/add-user', {
+        title: 'Admin > Create New User'
+    });
 }));
 
 //  ADMIN - CREATE NEW USER POST
@@ -65,7 +68,8 @@ router.post('/', isLoggedIn, isAdmin, validateUser, catchAsync(async (req, res) 
 router.get('/:id', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
     const user = await User.findById(req.params.id);
     res.render('admin/edit-user', {
-        user
+        user,
+        title: 'Admin > Update User'
     })
 }));
 
