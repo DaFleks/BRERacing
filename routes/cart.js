@@ -9,15 +9,12 @@ router.post('/', catchAsync(async (req, res) => {
         quantity
     } = req.body;
 
-    const {
-        name,
-        sku,
-        price
-    } = await Product.findById(productID);
+    const product = await Product.findById(productID);
+    let price = product.isDiscounted === true ? product.discountedPrice : product.price;
 
     req.session.addedItem = {
-        name: name,
-        sku: sku,
+        name: product.name,
+        sku: product.sku,
         price: (parseFloat(price) * parseFloat(quantity)).toFixed(2),
         quantity: quantity
     }
@@ -39,6 +36,7 @@ router.post('/', catchAsync(async (req, res) => {
     req.session.cartSubtotal = req.session.cart.reduce((accumulator, cartItem) => {
         return (parseFloat(accumulator) + parseFloat(cartItem.price)).toFixed(2);
     }, 0);
+
     req.flash('success', 'Added ' + req.session.addedItem.quantity + 'x ' + req.session.addedItem.name + ' to the cart!');
     res.redirect('/');
 }))
