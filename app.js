@@ -60,6 +60,7 @@ app.use(session({
     }
 }))
 app.use(flash());
+app.use(express.json());
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -83,6 +84,9 @@ app.use((req, res, next) => {
 //  HOMEPAGE (ALL PRODUCTS LISTED)
 app.get('/', async (req, res) => {
     const products = await Product.find({});
+
+    if (!products) req.flash('warning', 'No Products Available As Of Yet.');
+    
     res.render('index', {
         products, 
         title: 'Slot Car Parts'

@@ -9,11 +9,11 @@
 
 <div class="row">
     <div class="col-12 px-3">
-        <div class="accordion accordion-flush" id="accordion-faqs-flush">
+        <div class="accordion accordion-flush border rounded" id="accordion-faqs-flush">
             <% for (let i = 0; i < faqs.length; i++) { %>
             <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-heading-<%= i %>">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
                         data-bs-target="#flush-collapse-<%- i %>" aria-expanded="false"
                         aria-controls="flush-collapse-<%= i %>">
                         <%= faqs[i].title %>

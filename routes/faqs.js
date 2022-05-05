@@ -6,6 +6,9 @@ const router = express.Router();
 //  FAQS PAGE
 router.get('/', catchAsync(async (req, res) => {
     const faqs = await Faq.find({});
+
+    if (!faqs) req.flash('warning', 'No FAQs stored!');
+
     res.render('faqs', {
         faqs,
         title: 'FAQs'

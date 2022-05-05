@@ -10,7 +10,7 @@
                 data-bs-target="#cartModal">
                 <i class="fas fa-shopping-cart text-light"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    <%= cartQty %><span class="visually-hidden">items in your cart.</span></span>
+                    <span class="visually-hidden">items in your cart.</span></span>
             </button>
             <!-- NAVBAR TOGGLER -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -121,8 +121,8 @@
                     <button id="lg-cart" class="btn btn-outline-light position-relative d-none d-lg-block me-2"
                         style="top: 3px;" data-bs-toggle="modal" data-bs-target="#cartModal">
                         <i class="fas fa-shopping-cart text-light"></i>
-                        <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger"
-                            style="top: 5px;"><%= cartQty %></span>
+                        <span id="cart-btn-lg" class="position-absolute start-100 translate-middle badge rounded-pill bg-danger"
+                            style="top: 5px;"></span>
                         <span class="visually-hidden">items in your cart.</span>
                     </button>
                 </li>

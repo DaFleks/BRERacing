@@ -22,11 +22,9 @@ module.exports.isLoggedIn = (req, res, next) => {
 }
 
 module.exports.isAdmin = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        if (req.user.userLevel === 2) {
-            next();
-        } else {
-            throw new ExpressError('Page Not Found', 404);
-        }
+    if (req.user.userLevel === 2) {
+        next();
+    } else {
+        throw new ExpressError('Page Not Found', 404);
     }
 }

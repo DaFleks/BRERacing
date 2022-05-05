@@ -11,7 +11,9 @@
             <div class="row g-0">
                 <div class="col-4 col-md-12">
                     <div class="product-img border rounded bg-light">
-                        <img src="/images/products/<%= product._id %>/<%= product.image %>" class="my-auto">
+                        <a class="single-image" href="/images/products/<%= product._id %>/<%= product.image %>" >
+                            <img src="/images/products/<%= product._id %>/<%= product.image %>" class="my-auto">
+                        </a>
                     </div>
                 </div>
                 <div class="col-8 col-md-12 mt-md-3">
@@ -36,7 +38,8 @@
                         </div>
                         <div class="col-12">
                             <% if (!product.isDiscounted) { %>
-                            <h1 class="mb-0 d-md-none text-success"><%= product.price.toLocaleString('en-US', {style: 'currency', currency:'USD'}) %></h1>
+                            <h1 class="mb-0 d-md-none text-success">
+                                <%= product.price.toLocaleString('en-US', {style: 'currency', currency:'USD'}) %></h1>
                             <h4 class="mb-0 d-none d-md-block text-success">
                                 <%= product.price.toLocaleString('en-US', {style: 'currency', currency:'USD'}) %></h4>
                             <% } else { %>
@@ -64,7 +67,7 @@
                 </div>
 
                 <div class="col-6 mt-auto mb-3">
-                    <form action="/cart" method="POST">
+                    <form class="add-to-cart-form" onsubmit="addToCart(this.productID.value, this.quantity.value);">
                         <input type="hidden" name="productID" id="productID-<%= product._id%>" value=<%= product._id%>>
                         <div class="row">
                             <div class="col-12 mb-3">
@@ -74,7 +77,7 @@
                             <div class="col-12">
                                 <div class="d-grid gap-2">
                                     <input type="hidden" value=<%= product._id %>>
-                                    <button class="btn btn-success add-to-cart">
+                                    <button id="btn-<%= product._id%>" class="btn btn-success add-to-cart">
                                         <i class="fas fa-cart-plus"></i>&#160;&#160;Add to Cart
                                     </button>
                                 </div>
@@ -87,3 +90,6 @@
     </div>
     <% }}) %>
 </div>
+<script src="/scripts/addToCart.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/css/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
