@@ -60,9 +60,11 @@ const getCartQty = async () => {
 
     if (cartQty > 0) {
         document.querySelector('#cart-btn-lg').innerHTML = cartQty;
+        document.querySelector('#cart-btn-sm').innerHTML = cartQty;
         document.querySelector('#cartQty').innerHTML = cartQty;
     } else {
         document.querySelector('#cart-btn-lg').innerHTML = 0;
+        document.querySelector('#cart-btn-sm').innerHTML = 0;
         document.querySelector('#cartQty').innerHTML = 0;
     }
 };
