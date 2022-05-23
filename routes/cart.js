@@ -4,53 +4,74 @@ const catchAsync = require('../utils/CatchAsync');
 const router = express.Router();
 
 router.post('/', catchAsync(async (req, res, next) => {
-    const {
-        productID,
-        quantity
-    } = req.body;
+            const {
+                productID,
+                quantity
+            } = req.body;
 
-    const product = await Product.findById(productID);
-    let price = product.isDiscounted === true ? product.discountedPrice : product.price;
+            const product = await Product.findById(productID);
+            let price = product.isDiscounted === true ? product.discountedPrice : product.price;
 
-    const newItem = {
-        name: product.name,
-        sku: product.sku,
-        price: (parseFloat(price) * parseFloat(quantity)).toFixed(2),
-        quantity: quantity
-    }
+            const newItem = {
+                id: product._id,
+                name: product.name,
+                sku: product.sku,
+                price: (parseFloat(price) * parseFloat(quantity)).toFixed(2),
+                quantity: quantity
+            }
 
-    if (req.session.cart) {
-        req.session.cart.push(newItem);
+            if (req.session.cart) {
+                let itemExists = false;
+                let index = 0;
 
-        req.session.cartQty = req.session.cart.reduce((accumulator, cartItem) => {
-            return (parseInt(accumulator) + parseInt(cartItem.quantity));
-        }, 0);
-    } else {
-        req.session.cart = [newItem];
+                for (let i = 0; i < req.session.cart.length; i++) {
+                    if (req.session.cart[i].id == product._id) {
+                        itemExists = true;
+                        index = i;
+                        break;
+                    }
+                }
 
-        req.session.cartQty = req.session.cart.reduce((accumulator, cartItem) => {
-            return (parseInt(accumulator) + parseInt(cartItem.quantity));
-        }, 0);
-    }
+                if (!itemExists) {
+                    req.session.cart.push(newItem);
 
-    req.session.cartSubtotal = req.session.cart.reduce((accumulator, cartItem) => {
-        return (parseFloat(accumulator) + parseFloat(cartItem.price)).toFixed(2);
-    }, 0);
+                    req.session.cartQty = req.session.cart.reduce((accumulator, cartItem) => {
+                        return (parseInt(accumulator) + parseInt(cartItem.quantity));
+                    }, 0);
+                } else {
+                    //  DEFINITELY A BETTER WAY TO DO THIS
+                    req.session.cart[index].quantity = parseInt(req.session.cart[index].quantity) + parseInt(newItem.quantity);
+                    req.session.cart[index].price = parseFloat(req.session.cart[index].price) + parseFloat(newItem.price);
+                    }
+                    req.session.cartQty = req.session.cart.reduce((accumulator, cartItem) => {
+                        return (parseInt(accumulator) + parseInt(cartItem.quantity));
+                    }, 0);
+                } else {
+                    req.session.cart = [newItem];
 
-    next();
-}))
+                    req.session.cartQty = req.session.cart.reduce((accumulator, cartItem) => {
+                        return (parseInt(accumulator) + parseInt(cartItem.quantity));
+                    }, 0);
+                }
 
-router.get('/cartdata', catchAsync(async (req, res) => {
-    res.json({
-        cart: req.session.cart,
-        subtotal: req.session.cartSubtotal
-    });
-}))
+                req.session.cartSubtotal = req.session.cart.reduce((accumulator, cartItem) => {
+                    return (parseFloat(accumulator) + parseFloat(cartItem.price)).toFixed(2);
+                }, 0);
 
-router.get('/cartqty', catchAsync(async (req, res, next) => {
-    res.json({
-        cartQty: req.session.cartQty
-    });
-}))
+                next();
+            }))
 
-module.exports = router;
+        router.get('/cartdata', catchAsync(async (req, res) => {
+            res.json({
+                cart: req.session.cart,
+                subtotal: req.session.cartSubtotal
+            });
+        }))
+
+        router.get('/cartqty', catchAsync(async (req, res, next) => {
+            res.json({
+                cartQty: req.session.cartQty
+            });
+        }))
+
+        module.exports = router;
