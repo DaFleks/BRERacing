@@ -37,25 +37,27 @@ const populateCart = async () => {
     let checkoutTable = document.querySelector('#cartBody');
     checkoutTable.innerHTML = '';
 
-    cart.forEach((cartItem) => {
-        let row = checkoutTable.insertRow(-1);
-        let cells = new Array(4);
+    if (cart) {
+        cart.forEach((cartItem) => {
+            let row = checkoutTable.insertRow(-1);
+            let cells = new Array(4);
 
-        for (let i = 0; i < cells.length; i++) {
-            cells[i] = row.insertCell(i);
-        }
+            for (let i = 0; i < cells.length; i++) {
+                cells[i] = row.insertCell(i);
+            }
 
-        cells[1].classList.add('text-center');
-        cells[2].classList.add('text-center');
-        cells[3].classList.add('text-end');
-        cells[0].innerHTML = cartItem.name;
-        cells[1].innerHTML = cartItem.sku;
-        cells[2].innerHTML = cartItem.quantity;
-        cells[3].innerHTML = Number(cartItem.price).toLocaleString('en-US', {
-            style: 'currency',
-            currency: 'USD'
-        });
-    })
+            cells[1].classList.add('text-center');
+            cells[2].classList.add('text-center');
+            cells[3].classList.add('text-end');
+            cells[0].innerHTML = cartItem.name;
+            cells[1].innerHTML = cartItem.sku;
+            cells[2].innerHTML = cartItem.quantity;
+            cells[3].innerHTML = Number(cartItem.price).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            });
+        })
+    }
 
     document.querySelector('#subtotal').innerHTML = Number(subtotal).toLocaleString('en-US', {
         style: 'currency',
@@ -65,13 +67,8 @@ const populateCart = async () => {
 
 async function emptyCart() {
     await fetch('/cart/emptycart', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
+        method: 'POST'
     })
-
     populateCart();
     getCartQty();
 }
@@ -82,10 +79,14 @@ window.addEventListener('load', () => {
             e.preventDefault();
         })
     })
+
     getCartQty();
     populateCart();
+
     var emptyCartBtn = document.getElementById("emptyCart");
+
     emptyCartBtn.addEventListener('click', () => {
+        console.log('empty cart clicked!');
         emptyCart();
     })
 })
@@ -124,4 +125,3 @@ const toggleCartBtns = (option) => {
         }
     })
 }
-

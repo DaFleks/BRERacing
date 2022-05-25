@@ -6,6 +6,8 @@ const router = express.Router();
 router.post('/emptycart', catchAsync(async (req, res, next) => {
     req.session.cart = [];
     req.session.cartQty = 0;
+    req.session.cartSubtotal = 0.00;
+    next();
 }))
 
 router.post('/', catchAsync(async (req, res, next) => {
@@ -67,6 +69,8 @@ router.post('/', catchAsync(async (req, res, next) => {
 }))
 
 router.get('/cartdata', catchAsync(async (req, res) => {
+    if (req.session.cartSubtotal === undefined) req.session.cartSubtotal = 0.00.toFixed(2);
+
     res.json({
         cart: req.session.cart,
         subtotal: req.session.cartSubtotal
