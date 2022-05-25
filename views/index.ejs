@@ -11,7 +11,7 @@
             <div class="row g-0">
                 <div class="col-4 col-md-12">
                     <div class="product-img border rounded bg-light">
-                        <a class="single-image my-auto" href="/images/products/<%= product._id %>/<%= product.image %>" >
+                        <a class="single-image my-auto" href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
                             <img src="/images/products/<%= product._id %>/<%= product.image %>">
                         </a>
                     </div>
@@ -91,6 +91,3 @@
     </div>
     <% }}) %>
 </div>
-<script src="/scripts/addToCart.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-<script type="text/javascript" src="/css/fancybox/jquery.fancybox-1.3.4.pack.js"></script>

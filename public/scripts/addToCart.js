@@ -1,8 +1,25 @@
-document.querySelectorAll('.add-to-cart-form').forEach((form) => {
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+const getCartQty = async () => {
+    let response = await fetch('/cart/cartqty', {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        method: "get",
     })
-})
+
+    const data = await response.json();
+    const cartQty = data.cartQty;
+
+    if (cartQty > 0) {
+        document.querySelector('#cart-btn-lg').innerHTML = cartQty;
+        document.querySelector('#cart-btn-sm').innerHTML = cartQty;
+        document.querySelector('#cartQty').innerHTML = cartQty;
+    } else {
+        document.querySelector('#cart-btn-lg').innerHTML = 0;
+        document.querySelector('#cart-btn-sm').innerHTML = 0;
+        document.querySelector('#cartQty').innerHTML = 0;
+    }
+};
 
 const populateCart = async () => {
     const response = await fetch('/cart/cartdata', {
@@ -46,31 +63,32 @@ const populateCart = async () => {
     });
 }
 
-const getCartQty = async () => {
-    let response = await fetch('/cart/cartqty', {
+async function emptyCart() {
+    await fetch('/cart/emptycart', {
+        method: 'POST',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        method: "get",
+            'Content-Type': 'application/json'
+        }
     })
 
-    const data = await response.json();
-    const cartQty = data.cartQty;
+    populateCart();
+    getCartQty();
+}
 
-    if (cartQty > 0) {
-        document.querySelector('#cart-btn-lg').innerHTML = cartQty;
-        document.querySelector('#cart-btn-sm').innerHTML = cartQty;
-        document.querySelector('#cartQty').innerHTML = cartQty;
-    } else {
-        document.querySelector('#cart-btn-lg').innerHTML = 0;
-        document.querySelector('#cart-btn-sm').innerHTML = 0;
-        document.querySelector('#cartQty').innerHTML = 0;
-    }
-};
-
-getCartQty();
-populateCart();
+window.addEventListener('load', () => {
+    document.querySelectorAll('.add-to-cart-form').forEach((form) => {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+        })
+    })
+    getCartQty();
+    populateCart();
+    var emptyCartBtn = document.getElementById("emptyCart");
+    emptyCartBtn.addEventListener('click', () => {
+        emptyCart();
+    })
+})
 
 async function addToCart(productID, quantity) {
     toggleCartBtns('disable');
@@ -106,3 +124,4 @@ const toggleCartBtns = (option) => {
         }
     })
 }
+
