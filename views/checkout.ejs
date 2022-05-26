@@ -7,7 +7,7 @@
     </div>
     <div class="col-12 px-3">
         <form action="/orders" method="POST">
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-12 col-md-6 pe-md-5">
                     <div class="row mb-3">
                         <div class="col-12 mb-3">
@@ -45,22 +45,69 @@
                             <label for="unit" class="form-label">Apt/Unit #</label>
                             <input type="text" class="form-control" name="unit" id="unit">
                         </div>
-                        <div class="col-6 mb-3">
-                            <label for="country" class="form-label">Country</label>
-                            <input type="text" class="form-control" name="country" id="country">
-                        </div>
-                        <div class="col-6">
-                            <label for="state" class="form-label">State/Prov.</label>
-                            <input type="text" class="form-control" name="state" id="state">
-                        </div>
-                        <div class="col-6 mb-3">
+                        <div class="col-4">
                             <label for="city" class="form-label">City</label>
                             <input type="text" class="form-control" name="city" id="city" <% if (currentUser) { %>
                                 value=<%= currentUser.city %> <% } %>>
                         </div>
-
-                        <div class="col-6">
-                            <label for="zip" class="form-label">Zip/Postal Code</label>
+                        <div class="col-4">
+                            <label for="state" class="form-label">State</label>
+                            <select class="form-select" name="state" id="state">
+                                <option value="AL">AL</option>
+                                <option value="AK">AK</option>
+                                <option value="AR">AR</option>
+                                <option value="AZ">AZ</option>
+                                <option value="CA">CA</option>
+                                <option value="CO">CO</option>
+                                <option value="CT">CT</option>
+                                <option value="DC">DC</option>
+                                <option value="DE">DE</option>
+                                <option value="FL">FL</option>
+                                <option value="GA">GA</option>
+                                <option value="HI">HI</option>
+                                <option value="IA">IA</option>
+                                <option value="ID">ID</option>
+                                <option value="IL">IL</option>
+                                <option value="IN">IN</option>
+                                <option value="KS">KS</option>
+                                <option value="KY">KY</option>
+                                <option value="LA">LA</option>
+                                <option value="MA">MA</option>
+                                <option value="MD">MD</option>
+                                <option value="ME">ME</option>
+                                <option value="MI">MI</option>
+                                <option value="MN">MN</option>
+                                <option value="MO">MO</option>
+                                <option value="MS">MS</option>
+                                <option value="MT">MT</option>
+                                <option value="NC">NC</option>
+                                <option value="NE">NE</option>
+                                <option value="NH">NH</option>
+                                <option value="NJ">NJ</option>
+                                <option value="NM">NM</option>
+                                <option value="NV">NV</option>
+                                <option value="NY">NY</option>
+                                <option value="ND">ND</option>
+                                <option value="OH">OH</option>
+                                <option value="OK">OK</option>
+                                <option value="OR">OR</option>
+                                <option value="PA">PA</option>
+                                <option value="RI">RI</option>
+                                <option value="SC">SC</option>
+                                <option value="SD">SD</option>
+                                <option value="TN">TN</option>
+                                <option value="TX">TX</option>
+                                <option value="UT">UT</option>
+                                <option value="VT">VT</option>
+                                <option value="VA">VA</option>
+                                <option value="WA">WA</option>
+                                <option value="WI">WI</option>
+                                <option value="WV">WV</option>
+                                <option value="WY">WY</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label for="zip" class="form-label">Zip Code</label>
                             <input type="text" class="form-control" name="zip" id="zip" <% if (currentUser) { %>
                                 value=<%= currentUser.zip %> <% } %>>
                         </div>
@@ -77,7 +124,7 @@
                     <% } %>
                 </div>
 
-                <div id="checkoutOrder" class="col-12 col-md-6 mt-3 mt-md-0 ps-md-5">
+                <div id="checkoutOrder" class="col-12 col-md-6 mt-3 mt-md-0 ps-md-5 pe-md-3">
                     <% if (cart) { %>
                     <% cart.forEach((cartItem) => { %>
                     <div class="row pb-3 mb-3 border-bottom">

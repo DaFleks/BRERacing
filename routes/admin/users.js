@@ -24,7 +24,8 @@ const validateUser = (req, res, next) => {
 }
 
 //  ADMIN - GET ALL USERS
-router.get('/', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
+// isLoggedIn, isAdmin,
+router.get('/', catchAsync(async (req, res) => {
     const users = await User.find({});
     res.render('admin/users-list', {
         users,
@@ -33,7 +34,7 @@ router.get('/', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
 }));
 
 //  ADMIN - CREATE NEW USER
-router.get('/new', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
+router.get('/new', catchAsync(async (req, res) => {
     res.render('admin/add-user', {
         title: 'Admin > Create New User'
     });
@@ -65,7 +66,7 @@ router.post('/', isLoggedIn, isAdmin, validateUser, catchAsync(async (req, res) 
 }));
 
 //  ADMIN - UPDATE USER
-router.get('/:id', isLoggedIn, isAdmin, catchAsync(async (req, res) => {
+router.get('/:id', catchAsync(async (req, res) => {
     const user = await User.findById(req.params.id);
     res.render('admin/edit-user', {
         user,

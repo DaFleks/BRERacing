@@ -26,12 +26,16 @@
                             <td class="text-center">
                                 <select id="status" name="status" class="form-select" aria-label="Default select example">
                                     <option value="Processing" <% if (order.orderStatus === 'Processing') { %> selected
-                                        <% } %>>Processing</option>
+                                        <% } %>>Processing
+                                    </option>
                                     <option value="Shipped" <% if (order.orderStatus === 'Shipped') { %> selected
-                                        <% } %>>Shipped</option>
+                                        <% } %>><span class="text-success">&#9632;&#160;&#160;</span>Shipped
+                                    </option>
                                     <option value="Canceled" <% if (order.orderStatus === 'Canceled') { %> selected
-                                        <% } %>>Canceled</option>
-                                    <option value="Hold" <% if (order.orderStatus === 'Hold') { %> selected <% } %>>Hold
+                                        <% } %>>Canceled
+                                    </option>
+                                    <option value="Hold" <% if (order.orderStatus === 'Hold') { %> selected 
+                                        <% } %>>Hold
                                     </option>
                                 </select>
                             </td>
