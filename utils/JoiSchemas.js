@@ -52,37 +52,38 @@ module.exports.userSchema = Joi.object({
         .required(),
     lastName: Joi.string()
         .required(),
-        street: Joi.string().allow(''),
-        city: Joi.string().allow(''),
-        state: Joi.string().allow(''),
-        zip: Joi.string().allow('')
+    street: Joi.string().allow(''),
+    city: Joi.string().allow(''),
+    state: Joi.string().allow(''),
+    zip: Joi.string().allow(''),
+    unit: Joi.string().allow('')
 })
 
 module.exports.registerSchema = Joi.object({
     userLevel: Joi.number()
-    .min(1)
-    .max(1),
-email: Joi.string()
-    .email({
-        minDomainSegments: 2
-    }).required(),
-password: joiPassword
-    .string()
-    .minOfSpecialCharacters(1)
-    .minOfLowercase(1)
-    .minOfUppercase(1)
-    .minOfNumeric(1)
-    .noWhiteSpaces()
-    .required(),
-password2: Joi.string()
-    .valid(Joi.ref('password'))
-    .required(),
-firstName: Joi.string()
-    .required(),
-lastName: Joi.string()
-    .required(),
-street: Joi.string().allow(''),
-city: Joi.string().allow(''),
-state: Joi.string().allow(''),
-zip: Joi.string().allow('')
+        .min(1)
+        .max(1),
+    email: Joi.string()
+        .email({
+            minDomainSegments: 2
+        }).required(),
+    password: joiPassword
+        .string()
+        .minOfSpecialCharacters(1)
+        .minOfLowercase(1)
+        .minOfUppercase(1)
+        .minOfNumeric(1)
+        .noWhiteSpaces()
+        .required(),
+    password2: Joi.string()
+        .valid(Joi.ref('password'))
+        .required(),
+    firstName: Joi.string()
+        .required(),
+    lastName: Joi.string()
+        .required(),
+    street: Joi.string().allow(''),
+    city: Joi.string().allow(''),
+    state: Joi.string().allow(''),
+    zip: Joi.string().allow('')
 })
