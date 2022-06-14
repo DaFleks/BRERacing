@@ -6,7 +6,7 @@ const {
 } = require('../utils/JoiSchemas');
 const router = express.Router();
 require('dotenv').config({
-    path: './vars.env'
+    path: './.env'
 });
 
 const validateContact = (req, res, next) => {

@@ -43,8 +43,9 @@
                     <tr class="fw-bold">
                         <td>
                             <div class="tableImg d-flex align-items-center justify-content-center border bg-light">
-                                <img class="img-fluid" src="/images/products/<%= product._id %>/<%= product.image %>"
-                                    style="max-width: 100px;">
+                                <a class="single-image my-auto" href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
+                                    <img src="/images/products/<%= product._id %>/<%= product.image %>">
+                                </a>
                             </div>
                         </td>
                         <td>

@@ -7,7 +7,7 @@ const {
     isLoggedIn
 } = require('../utils/middleware');
 const router = express.Router();
-const letters = ['A', 'B', 'C', 'D', ]
+
 router.get('/', isLoggedIn, catchAsync(async (req, res) => {
     const userOrders = await User.findOne({
             _id: req.user._id

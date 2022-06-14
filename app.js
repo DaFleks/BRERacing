@@ -28,7 +28,7 @@ const order = require('./routes/order');
 
 //  VARS
 require('dotenv').config({
-    path: './vars.env'
+    path: './.env'
 });
 
 //  DB CONNECT

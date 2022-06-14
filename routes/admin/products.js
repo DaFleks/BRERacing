@@ -41,7 +41,7 @@ const upload = multer({
 });
 
 //  ADMIN - PRODUCT LIST
-router.get('/', isLoggedIn, isAdmin, async (req, res) => {
+router.get('/', async (req, res) => {
     const products = await Product.find({});
     res.render('admin/product-list', {
         products,
@@ -84,7 +84,7 @@ router.post('/', isLoggedIn, isAdmin, upload.single('image'), productValidate, c
 }));
 
 //  ADMIN - UPDATE PRODUCT
-router.get('/:id', isLoggedIn, isAdmin, async (req, res) => {
+router.get('/:id', async (req, res) => {
     const product = await Product.findOne({
         _id: req.params.id
     });
