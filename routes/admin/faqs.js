@@ -1,6 +1,6 @@
 const express = require('express');
 const catchAsync = require('../../utils/CatchAsync');
-const faqs = require('../../controllers/faqs');
+const faqs = require('../../controllers/admin/faqs');
 const {
     isLoggedIn, isAdmin
 } = require('../../utils/middleware');

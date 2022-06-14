@@ -1,8 +1,8 @@
-const Faq = require('../models/faq');
+const Faq = require('../../models/faq');
 const {
     faqSchema
-} = require('../utils/JoiSchemas');
-const ExpressError = require('../utils/ExpressError');
+} = require('../../utils/JoiSchemas');
+const ExpressError = require('../../utils/ExpressError');
 
 //  GET ALL FAQS - RENDER
 module.exports.index = async (req, res) => {
