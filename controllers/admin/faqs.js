@@ -77,7 +77,7 @@ module.exports.deleteFaq = async (req, res) => {
     res.redirect('/admin/faqs');
 }
 
-module.exports.validateFaq = (req, res, next) => {
+module.exports.validate = (req, res, next) => {
     //  If any errors are present during validation, store it into an object.
     const {
         error
