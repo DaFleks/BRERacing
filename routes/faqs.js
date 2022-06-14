@@ -1,18 +1,11 @@
 const express = require('express');
-const Faq = require('../models/faq');
 const catchAsync = require('../utils/CatchAsync');
+const {
+    getAllFaqs
+} = require('../controllers/faqs');
 const router = express.Router();
 
-//  FAQS PAGE
-router.get('/', catchAsync(async (req, res) => {
-    const faqs = await Faq.find({});
-
-    if (!faqs) req.flash('warning', 'No FAQs stored!');
-
-    res.render('faqs', {
-        faqs,
-        title: 'FAQs'
-    })
-}))
+//  FAQS PAGE - RENDER
+router.get('/', catchAsync(getAllFaqs))
 
 module.exports = router;
